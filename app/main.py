@@ -26,7 +26,6 @@ from app.tools.election_tools import (
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 CODELAB_DIR = BASE_DIR / "codelab"
-SLIDES_DIR = BASE_DIR / "slides"
 
 app = FastAPI(
     title="DevFest Lagos 2026 — Election Intelligence ADK Agent API",
@@ -225,15 +224,6 @@ async def serve_codelab() -> FileResponse:
     if not codelab_html.exists():
         raise HTTPException(status_code=404, detail="Codelab HTML not found.")
     return FileResponse(codelab_html)
-
-
-@app.get("/slides", response_class=HTMLResponse)
-@app.get("/slides/", response_class=HTMLResponse)
-async def serve_slides() -> FileResponse:
-    slides_html = SLIDES_DIR / "index.html"
-    if not slides_html.exists():
-        raise HTTPException(status_code=404, detail="Slides HTML not found.")
-    return FileResponse(slides_html)
 
 
 if STATIC_DIR.exists():

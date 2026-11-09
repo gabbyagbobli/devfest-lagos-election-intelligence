@@ -17,7 +17,6 @@ Welcome to the **DevFest Lagos 2026** flagship hands-on workshop! In this 40-min
 ### Live Workshop Links
 * **Live Deployed Election Intelligence App:** [https://devfest-lagos-election-agent-2026.web.app](https://devfest-lagos-election-agent-2026.web.app)
 * **Interactive Codelab Guide:** [https://devfest-lagos-election-agent-2026.web.app/codelab/](https://devfest-lagos-election-agent-2026.web.app/codelab/)
-* **10-Minute Introduction Slide Deck:** [https://devfest-lagos-election-agent-2026.web.app/slides/](https://devfest-lagos-election-agent-2026.web.app/slides/)
 * **GitHub Source Repository:** [https://github.com/gabbyagbobli/devfest-lagos-election-intelligence](https://github.com/gabbyagbobli/devfest-lagos-election-intelligence)
 
 ### The Central Problem: Election Misinformation vs. Grounded Intelligence

@@ -15,7 +15,7 @@ A flagship 60-minute hands-on workshop and production-ready **Multi-Agent Electi
 | **🛡️ Live Election Intelligence App (Firebase Hosting)** | **[https://devfest-lagos-election-agent-2026.web.app](https://devfest-lagos-election-agent-2026.web.app)** |
 | **⚡ Live ADK 2 + Gemini Cloud Run Backend & UI** | **[https://devfest-lagos-election-agent-1084480045730.us-central1.run.app](https://devfest-lagos-election-agent-1084480045730.us-central1.run.app)** |
 | **📘 Interactive 40-Minute Hands-on Codelab** | **[https://devfest-lagos-election-agent-2026.web.app/codelab/](https://devfest-lagos-election-agent-2026.web.app/codelab/)** |
-| **🎤 10-Minute Opening Slide Deck** | **[https://devfest-lagos-election-agent-2026.web.app/slides/](https://devfest-lagos-election-agent-2026.web.app/slides/)** |
+| **🎤 Speaker Slide Deck Content Guide** | **[`SLIDE_DECK_CONTENT.md`](./SLIDE_DECK_CONTENT.md)** |
 | **💻 GitHub Source Repository** | **[https://github.com/gabbyagbobli/devfest-lagos-election-intelligence](https://github.com/gabbyagbobli/devfest-lagos-election-intelligence)** |
 
 ---

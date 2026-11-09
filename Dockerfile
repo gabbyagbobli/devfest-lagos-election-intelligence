@@ -13,7 +13,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY app/ ./app/
 COPY data/ ./data/
 COPY codelab/ ./codelab/
-COPY slides/ ./slides/
 COPY docs/ ./docs/
 COPY pytest.ini .
 

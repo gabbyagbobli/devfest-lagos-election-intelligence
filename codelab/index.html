@@ -15,8 +15,8 @@
       --bg-sidebar: #f8fafc;
       --bg-page: #f1f5f9;
       --bg-card: #ffffff;
-      --text-main: #1e293b;
-      --text-secondary: #475569;
+      --text-main: #0f172a;
+      --text-secondary: #334155;
       --border: #e2e8f0;
       --positive-bg: #ecfdf5;
       --positive-border: #10b981;
@@ -48,7 +48,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1.25rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.22);
       z-index: 20;
       flex-shrink: 0;
     }
@@ -59,16 +59,18 @@
       min-width: 0;
     }
     .back-btn {
-      color: #94a3b8;
+      color: #e2e8f0;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      padding: 0.38rem 0.75rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 6px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
       white-space: nowrap;
+      transition: all 0.15s ease;
     }
-    .back-btn:hover { color: #fff; background: rgba(255,255,255,0.16); }
+    .back-btn:hover { color: #fff; background: rgba(16, 185, 129, 0.25); border-color: #10b981; }
     .header-title {
       font-size: 0.98rem;
       font-weight: 700;
@@ -100,13 +102,14 @@
       text-decoration: none;
       font-size: 0.8rem;
       font-weight: 600;
-      padding: 0.35rem 0.7rem;
+      padding: 0.38rem 0.75rem;
       border-radius: 6px;
       border: 1px solid #334155;
+      background: #1e293b;
     }
     .header-link:hover { color: #fff; border-color: #34d399; }
 
-    /* Layout Container */
+    /* Body Layout */
     .codelab-body {
       display: flex;
       flex: 1;
@@ -115,15 +118,15 @@
 
     /* Left Step Drawer */
     .codelab-drawer {
-      width: 300px;
+      width: 310px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
       overflow-y: auto;
       padding: 1rem 0.75rem;
       flex-shrink: 0;
     }
-    @media (max-width: 900px) {
-      .codelab-drawer { width: 230px; }
+    @media (max-width: 920px) {
+      .codelab-drawer { width: 240px; }
     }
     @media (max-width: 680px) {
       .codelab-drawer { display: none; }
@@ -138,8 +141,9 @@
       color: var(--text-secondary);
       font-size: 0.84rem;
       font-weight: 500;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.3rem;
       transition: all 0.15s ease;
+      user-select: none;
     }
     .step-nav-item:hover {
       background: #e2e8f0;
@@ -189,15 +193,29 @@
       flex-direction: column;
       align-items: center;
     }
+    @media (max-width: 680px) {
+      .codelab-main { padding: 1.2rem 1rem 4rem; }
+    }
     .step-card {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 2.25rem 2.5rem;
       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
     }
+    @media (max-width: 680px) {
+      .step-card { padding: 1.4rem 1.2rem; }
+    }
+
+    .codelab-step {
+      display: none;
+    }
+    .codelab-step.active-step {
+      display: block;
+    }
+
     .step-header {
       border-bottom: 2px solid #f1f5f9;
       padding-bottom: 1rem;
@@ -224,33 +242,33 @@
     }
 
     /* Content Typography */
-    .step-content h2 {
+    .codelab-step h2 {
       font-size: 1.18rem;
       font-weight: 700;
       margin: 1.5rem 0 0.65rem;
       color: #0f172a;
     }
-    .step-content h3 {
+    .codelab-step h3 {
       font-size: 1rem;
       font-weight: 700;
       margin: 1.2rem 0 0.45rem;
       color: #1e293b;
     }
-    .step-content p {
-      line-height: 1.7;
+    .codelab-step p {
+      line-height: 1.72;
       color: #334155;
       margin-bottom: 0.9rem;
       font-size: 0.95rem;
     }
-    .step-content ul, .step-content ol {
+    .codelab-step ul, .codelab-step ol {
       padding-left: 1.4rem;
       margin-bottom: 1rem;
       color: #334155;
-      line-height: 1.7;
+      line-height: 1.72;
       font-size: 0.95rem;
     }
-    .step-content li { margin-bottom: 0.4rem; }
-    .step-content code {
+    .codelab-step li { margin-bottom: 0.45rem; }
+    .codelab-step code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.84rem;
       background: #f1f5f9;
@@ -259,7 +277,7 @@
       border-radius: 4px;
       border: 1px solid #e2e8f0;
     }
-    .step-content pre {
+    .codelab-step pre {
       position: relative;
       background: var(--code-bg);
       color: var(--code-text);
@@ -268,10 +286,10 @@
       overflow-x: auto;
       margin: 0.9rem 0 1.2rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.83rem;
-      line-height: 1.55;
+      font-size: 0.82rem;
+      line-height: 1.58;
     }
-    .step-content pre code {
+    .codelab-step pre code {
       background: transparent;
       color: inherit;
       border: none;
@@ -281,27 +299,27 @@
       position: absolute;
       top: 0.55rem;
       right: 0.65rem;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.14);
       color: #e2e8f0;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 5px;
-      padding: 0.22rem 0.55rem;
+      padding: 0.22rem 0.6rem;
       font-size: 0.72rem;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
     }
-    .copy-btn:hover { background: rgba(255,255,255,0.24); }
+    .copy-btn:hover { background: rgba(255,255,255,0.28); }
 
-    /* Solace / Google Codelabs Info Boxes (aside.positive & aside.negative) */
+    /* Solace / Google Codelabs Callout Info Boxes */
     .aside-positive {
       background: var(--positive-bg);
       border-left: 4px solid var(--positive-border);
       color: var(--positive-text);
       padding: 1rem 1.2rem;
       border-radius: 0 8px 8px 0;
-      margin: 1.1rem 0;
+      margin: 1.15rem 0;
       font-size: 0.92rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .aside-negative {
       background: var(--negative-bg);
@@ -309,38 +327,40 @@
       color: var(--negative-text);
       padding: 1rem 1.2rem;
       border-radius: 0 8px 8px 0;
-      margin: 1.1rem 0;
+      margin: 1.15rem 0;
       font-size: 0.92rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* Tables */
-    .step-content table {
+    .codelab-step table {
       width: 100%;
       border-collapse: collapse;
       margin: 1rem 0 1.25rem;
       font-size: 0.88rem;
     }
-    .step-content th, .step-content td {
+    .codelab-step th, .codelab-step td {
       border: 1px solid var(--border);
       padding: 0.65rem 0.8rem;
       text-align: left;
+      vertical-align: top;
     }
-    .step-content th {
+    .codelab-step th {
       background: #f8fafc;
       font-weight: 700;
+      color: #0f172a;
     }
 
-    /* Bottom Controls */
+    /* Bottom Navigation Controls */
     .step-footer {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       display: flex;
       justify-content: space-between;
       margin-top: 1.5rem;
     }
     .nav-btn {
-      padding: 0.7rem 1.35rem;
+      padding: 0.72rem 1.4rem;
       border-radius: 8px;
       font-weight: 600;
       font-size: 0.9rem;
@@ -362,199 +382,445 @@
 <body>
   <header class="codelab-header">
     <div class="header-left">
-      <a href="/" class="back-btn">← Live Agent App</a>
-      <div class="header-title">Building a Trustworthy AI Agent for Election Intelligence with ADK and the Antigravity Harness</div>
+      <a href="/" class="back-btn">🛡️ Open Live Agent App</a>
+      <div class="header-title">DevFest Lagos 2026 Codelab: Building a Trustworthy AI Agent for Election Intelligence with ADK</div>
     </div>
     <div class="header-right">
       <div class="timer-pill" id="time-remaining">⏱️ 40 mins left</div>
-      <a href="/slides/" class="header-link">🎤 Intro Slides</a>
-      <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener" class="header-link">💻 GitHub</a>
+      <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener" class="header-link">💻 GitHub Repo</a>
     </div>
   </header>
 
   <div class="codelab-body">
-    <aside class="codelab-drawer" id="drawer"></aside>
+    <aside class="codelab-drawer" id="drawer">
+      <!-- Populated automatically from .codelab-step sections -->
+    </aside>
+
     <main class="codelab-main" id="main-scroll">
       <article class="step-card">
-        <div class="step-header">
-          <h1 id="step-title">1. Codelab Overview</h1>
-          <span class="step-time-badge" id="step-duration">Duration: 3:00</span>
-        </div>
-        <div class="step-content" id="step-content"></div>
-      </article>
-      <div class="step-footer">
-        <button class="nav-btn" id="prev-btn">← Back</button>
-        <button class="nav-btn primary" id="next-btn">Next Step →</button>
-      </div>
-    </main>
-  </div>
 
-  <script>
-    const STEPS = [
-      {
-        title: "Codelab Overview & Learning Objectives",
-        duration: 3,
-        html: `
-          <p>Welcome to the <strong>DevFest Lagos 2026</strong> hands-on workshop! Over the next <strong>40 minutes</strong>, you will build, orchestrate, test, and run a <strong>Trustworthy Multi-Agent Election Intelligence Application</strong> using <strong>Google's Agent Development Kit (ADK)</strong> and the <strong>Antigravity Harness</strong>.</p>
-          <h2>The Election Information Trust Challenge</h2>
-          <p>As elections approach, citizens, journalists, and observers increasingly ask AI systems about voting hours, PVC collection deadlines, BVAS accreditation rules, official announcements, and viral claims circulating on social media.</p>
-          <p>An ordinary chatbot answering from static training weights poses severe risks: it can hallucinate polling dates, confuse outdated rules with current law, or repeat unverified rumors with high confidence.</p>
-          <h2>What You Will Build</h2>
-          <ul>
-            <li><strong>A 4-Agent Google ADK System</strong> with an <code>election_intelligence_coordinator</code> routing requests to three specialized sub-agents: <code>election_research_agent</code>, <code>claim_verification_agent</code>, and <code>election_information_analyst</code>.</li>
-            <li><strong>Six Custom ADK Function Tools</strong> backed by a 3-Tier Electoral Source Trust Registry (<code>data/trusted_sources.json</code>) and a verified corpus of INEC regulations, Electoral Act provisions, and accredited observer reports (<code>data/election_corpus.json</code>).</li>
-            <li><strong>An Interactive Election Intelligence Trust Dashboard</strong> featuring live verification verdicts (<code>SUPPORTED</code>, <code>CONTRADICTED</code>, <code>INSUFFICIENT_EVIDENCE</code>), multi-agent execution traces, and clickable source attribution cards.</li>
-          </ul>
-          <div class="aside-positive">
-            <strong>💡 Core Principle — Retrieval ≠ Verification:</strong> Finding a statement online does not make it true. Your application will explicitly separate <em>source authority</em> (Tier 1–3), <em>retrieved evidence</em>, and the <em>epistemic conclusion</em> drawn.
+        <!-- ============================================================== -->
+        <!-- STEP 1: CODELAB OVERVIEW                                       -->
+        <!-- ============================================================== -->
+        <section class="codelab-step active-step" data-title="Codelab Overview" data-duration="3">
+          <div class="step-header">
+            <h1>1. Codelab Overview &amp; What We Are Building</h1>
+            <span class="step-time-badge">Duration: 3:00</span>
           </div>
-          <h2>Quick Workshop Links</h2>
+
+          <p>Welcome to the <strong>DevFest Lagos 2026</strong> hands-on workshop: <em>Building a Trustworthy AI Agent for Election Intelligence with ADK and the Antigravity Harness</em>.</p>
+          <p>In this <strong>40-minute hands-on codelab</strong>, you will build, orchestrate, test, and run a multi-agent Election Intelligence application powered by <strong>Google's Agent Development Kit (ADK 2)</strong> and engineered inside the <strong>Antigravity Harness</strong>.</p>
+
+          <h2>The Problem: Election Misinformation vs. Grounded Intelligence</h2>
+          <p>As elections approach, citizens, journalists, and civic observers increasingly rely on the internet and AI systems for information about candidates, electoral procedures, PVC collection deadlines, BVAS accreditation rules, official announcements, and breaking developments. Unfortunately, fabricated claims, doctored postponement notices, outdated guidelines, and unverified viral messages make it difficult to separate fact from speculation.</p>
+          <p>Instead of building an ordinary chatbot that generates plausible-sounding answers from its static training memory, you will build an <strong>agentic AI system</strong> that retrieves authoritative records, calls deterministic verification tools, coordinates specialized agents, and communicates uncertainty transparently.</p>
+
+          <h2>What You Will Build</h2>
+          <p>Your finished application demonstrates <strong>eight core trustworthy AI capabilities</strong>:</p>
+          <ol>
+            <li><strong>Election Information Retrieval</strong> from an allowlisted corpus of official electoral regulations and statutory provisions.</li>
+            <li><strong>Retrieval &amp; Grounding Using Reliable Sources</strong> via a 3-Tier Electoral Source Trust Registry (Tier 1 Statutory/INEC, Tier 2 Accredited Observers &amp; Fact-Checkers, Tier 3 Verified News Media).</li>
+            <li><strong>Verification of Claims Against Evidence</strong> with explicit epistemic verdicts (<code>SUPPORTED</code>, <code>CONTRADICTED</code>, or <code>INSUFFICIENT_EVIDENCE</code>).</li>
+            <li><strong>Summarization of Official Election Announcements</strong> and statutory timetables.</li>
+            <li><strong>Comparison of Information from Multiple Credible Sources</strong> across official, observer, and media perspectives.</li>
+            <li><strong>Strict Source Attribution &amp; References</strong> with document IDs (e.g., <code>[INEC-2026-PROC-01]</code>), publication dates, and official URLs.</li>
+            <li><strong>Transparent Communication of Uncertainty</strong> when evidence is incomplete, conflicting, or unverified.</li>
+            <li><strong>Multi-Agent Collaboration &amp; Orchestration</strong> using Google ADK (<code>Agent</code>, <code>FunctionTool</code>, <code>sub_agents</code>, and <code>Runner</code>).</li>
+          </ol>
+
+          <div class="aside-positive">
+            <strong>💡 Core Architectural Principle — Retrieval ≠ Verification:</strong><br/>
+            Finding a statement online does not automatically make it true. Throughout this workshop, your application will distinguish between the <strong>credibility of a source</strong>, the <strong>evidence it provides</strong>, and the <strong>conclusion that can reasonably be drawn</strong>.
+          </div>
+
+          <h2>Workshop Resources</h2>
           <ul>
-            <li><strong>Live Deployed Application:</strong> <a href="/" target="_blank">Open Election Intelligence Trust Dashboard</a></li>
-            <li><strong>10-Minute Introduction Slides:</strong> <a href="/slides/" target="_blank">Open Workshop Slide Deck</a></li>
-            <li><strong>GitHub Repository:</strong> <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank">gabbyagbobli/devfest-lagos-election-intelligence</a></li>
+            <li><strong>Live Deployed Election Intelligence Application:</strong> <a href="/" target="_blank" rel="noopener">https://devfest-lagos-election-agent-2026.web.app</a></li>
+            <li><strong>Live Cloud Run ADK 2 API &amp; Container:</strong> <a href="https://devfest-lagos-election-agent-1084480045730.us-central1.run.app" target="_blank" rel="noopener">https://devfest-lagos-election-agent-1084480045730.us-central1.run.app</a></li>
+            <li><strong>GitHub Starter &amp; Solution Repository:</strong> <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener">https://github.com/gabbyagbobli/devfest-lagos-election-intelligence</a></li>
           </ul>
-        `
-      },
-      {
-        title: "Understand the Multi-Agent Architecture",
-        duration: 4,
-        html: `
-          <p>A multi-agent system is not simply several chatbots placed together. In <strong>Google ADK</strong>, each agent has a distinct responsibility, curated instructions, and dedicated tools, coordinated by a parent orchestrator.</p>
-          <h2>Our 4-Agent ADK Topology</h2>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 2: MULTI-AGENT ARCHITECTURE                               -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Multi-Agent Architecture" data-duration="4">
+          <div class="step-header">
+            <h1>2. Understand the Multi-Agent Architecture</h1>
+            <span class="step-time-badge">Duration: 4:00</span>
+          </div>
+
+          <p>A multi-agent system is not simply several chatbots placed together. In <strong>Google ADK</strong>, each agent has a clearly defined responsibility, specialized system instructions, and scoped tools, coordinated by a root orchestrator.</p>
+
+          <h2>System Architecture Diagram</h2>
           <pre><code>                        ┌──────────────────────────────────────────────┐
                         │               User Query / Claim             │
                         └──────────────────────┬───────────────────────┘
+                                               │
                                                ▼
                 ┌──────────────────────────────────────────────────────────────┐
                 │        A. Election Intelligence Coordinator (root_agent)     │
-                │  • Classifies user intent & delegates to specialist agents   │
-                │  • Enforces epistemic humility & uncertainty indicators      │
+                │  • Understands user intent &amp; delegates to specialist agents  │
+                │  • Synthesizes findings &amp; enforces uncertainty indicators    │
                 └──────┬───────────────────────┬────────────────────────┬──────┘
                        │                       │                        │
          Procedures    ▼         Rumors/Claims ▼          Summaries     ▼
 ┌──────────────────────────────┐ ┌──────────────────────────────┐ ┌──────────────────────────────┐
 │  B. Election Research Agent  │ │  C. Claim Verification Agent │ │ D. Election Info Analyst     │
-│  • Official rules & lookup   │ │  • Evaluates claims vs facts │ │ • Summarizes announcements   │
+│  • Official rules &amp; lookup   │ │  • Evaluates claims vs facts │ │ • Summarizes announcements   │
 │  • Allowlist trust checks    │ │  • SUPPORTED / CONTRADICTED  │ │ • Compares Tier 1-3 sources  │
 │                              │ │    / INSUFFICIENT_EVIDENCE   │ │ • Extracts key dates         │
-└──────────────────────────────┘ └──────────────────────────────┘ └──────────────────────────────┘</code></pre>
-          <h2>The Three-Tier Electoral Source Trust Registry</h2>
+└──────────────┬───────────────┘ └──────────────┬───────────────┘ └──────────────┬───────────────┘
+               │                                │                                │
+               └────────────────────────────────┼────────────────────────────────┘
+                                                ▼
+                ┌──────────────────────────────────────────────────────────────┐
+                │         ADK Function Tools &amp; 3-Tier Trust Registry           │
+                │  • search_verified_election_corpus()                         │
+                │  • check_source_credibility()                                │
+                │  • verify_election_claim()                                   │
+                │  • get_official_announcements()                              │
+                │  • compare_multi_source_coverage()                           │
+                │  • fetch_allowlisted_web_source()                            │
+                └──────────────────────────────────────────────────────────────┘</code></pre>
+
+          <h2>The Four Specialized ADK Agents</h2>
           <table>
             <thead>
-              <tr><th>Tier</th><th>Category</th><th>Trust Score</th><th>Trusted Sources</th><th>Verification Policy</th></tr>
+              <tr>
+                <th>Agent Identifier</th>
+                <th>Role</th>
+                <th>Core Responsibilities &amp; Tools</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Tier 1</strong></td><td>Statutory &amp; Electoral Authority</td><td><code>0.98</code></td><td>INEC (<code>inecnigeria.org</code>), Electoral Act (<code>placng.org</code>)</td><td>Primary authority for dates, procedures, and eligibility.</td></tr>
-              <tr><td><strong>Tier 2</strong></td><td>Accredited Observers &amp; Fact-Checkers</td><td><code>0.90</code></td><td>YIAGA Africa, DUBAWA, Civil Society Situation Room</td><td>High credibility for field observation and forensic fact-checks.</td></tr>
-              <tr><td><strong>Tier 3</strong></td><td>Verified News Media</td><td><code>0.78</code></td><td>Channels TV, Premium Times Electoral Desk</td><td>Credible reporting; requires Tier 1/2 corroboration for legal rules.</td></tr>
-              <tr><td><strong>Blocked</strong></td><td>Unattributed / Disinformation</td><td><code>0.00</code></td><td>Viral WhatsApp forwards, clickbait blogs</td><td>Blocked from grounding; treated strictly as claims to verify.</td></tr>
+              <tr>
+                <td><code>election_intelligence_coordinator</code><br/>(<code>root_agent</code>)</td>
+                <td><strong>A. Coordinator</strong></td>
+                <td>Serves as the primary entry point, classifies user intent, delegates to the appropriate specialist sub-agent, and enforces epistemic uncertainty banners.</td>
+              </tr>
+              <tr>
+                <td><code>election_research_agent</code></td>
+                <td><strong>B. Research Specialist</strong></td>
+                <td>Searches approved election guidelines (<code>search_verified_election_corpus</code>), evaluates domain credibility (<code>check_source_credibility</code>), and blocks untrusted URLs (<code>fetch_allowlisted_web_source</code>).</td>
+              </tr>
+              <tr>
+                <td><code>claim_verification_agent</code></td>
+                <td><strong>C. Claim Verifier</strong></td>
+                <td>Examines claims presented by users (<code>verify_election_claim</code>), compares them against retrieved evidence, and assigns <code>SUPPORTED</code>, <code>CONTRADICTED</code>, or <code>INSUFFICIENT_EVIDENCE</code>.</td>
+              </tr>
+              <tr>
+                <td><code>election_information_analyst</code></td>
+                <td><strong>D. Information Analyst</strong></td>
+                <td>Summarizes official electoral commission communiqués (<code>get_official_announcements</code>) and compares coverage across Tier 1, Tier 2, and Tier 3 sources (<code>compare_multi_source_coverage</code>).</td>
+              </tr>
             </tbody>
           </table>
+
+          <h2>The Three-Tier Electoral Source Trust Registry (<code>data/trusted_sources.json</code>)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Trust Tier</th>
+                <th>Score</th>
+                <th>Allowlisted Sources</th>
+                <th>Verification Policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tier 1 — Official &amp; Statutory</strong></td>
+                <td><code>0.98</code></td>
+                <td>INEC (<code>inecnigeria.org</code>), Electoral Act Official Gazette (<code>placng.org</code>)</td>
+                <td>Primary authoritative record for polling dates, legal voting procedures, and voter eligibility.</td>
+              </tr>
+              <tr>
+                <td><strong>Tier 2 — Accredited Observers &amp; Fact-Checkers</strong></td>
+                <td><code>0.90</code></td>
+                <td>YIAGA Africa (<code>yiaga.org</code>), DUBAWA (<code>dubawa.org</code>), Nigeria Civil Society Situation Room (<code>situationroomng.org</code>)</td>
+                <td>High credibility for field observation, BVAS mock audits, and forensic fact-checking; cross-reference statutory rules with Tier 1.</td>
+              </tr>
+              <tr>
+                <td><strong>Tier 3 — Verified News Media</strong></td>
+                <td><code>0.78</code></td>
+                <td>Channels TV Electoral Desk (<code>channelstv.com</code>), Premium Times (<code>premiumtimesng.com</code>)</td>
+                <td>Credible journalistic reporting; claims regarding schedule changes or legal rules require Tier 1/2 corroboration.</td>
+              </tr>
+              <tr>
+                <td><strong>Untrusted / Blocked</strong></td>
+                <td><code>0.00</code></td>
+                <td>Viral WhatsApp forwards, anonymous Telegram leaks, clickbait domains</td>
+                <td>Blocked from grounding; treated strictly as unverified claims to be fact-checked.</td>
+              </tr>
+            </tbody>
+          </table>
+
           <div class="aside-negative">
-            <strong>⚠️ Zero-Fabrication Guardrail:</strong> None of the four agents may ever invent election results, voting procedures, candidate statements, or URLs. When evidence is incomplete, the agent must return <code>INSUFFICIENT_EVIDENCE</code>.
+            <strong>⚠️ Mandatory Responsible AI Guardrail:</strong><br/>
+            Never design the agent to invent election results, voting procedures, candidate statements, or source references. When evidence is missing or inconclusive, the system must explicitly return <code>INSUFFICIENT_EVIDENCE</code>.
           </div>
-        `
-      },
-      {
-        title: "Set Up the Development Environment",
-        duration: 5,
-        html: `
-          <p>In this step, you will clone the starter repository, create an isolated Python virtual environment, install <code>google-adk</code> and FastAPI, and verify your environment.</p>
-          <h2>1. Clone the Starter Repository</h2>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 3: ENVIRONMENT SETUP                                      -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Environment Setup" data-duration="5">
+          <div class="step-header">
+            <h1>3. Set Up the Development Environment</h1>
+            <span class="step-time-badge">Duration: 5:00</span>
+          </div>
+
+          <p>In this step, you will clone the workshop repository, create an isolated Python virtual environment, install <strong>Google ADK (<code>google-adk</code>)</strong> and <strong>FastAPI</strong>, and inspect the project layout.</p>
+
+          <h2>Prerequisites</h2>
+          <ul>
+            <li><strong>Python 3.11+</strong> installed (or Google Cloud Shell)</li>
+            <li><strong>Git</strong> installed</li>
+            <li><strong>Code Editor:</strong> Antigravity IDE, VS Code, or Cloud Shell Editor</li>
+            <li><em>(Optional)</em> A <strong>Gemini API Key</strong> (from Google AI Studio) or a <strong>Google Cloud Project</strong> with Vertex AI enabled. <em>Note: The repository also includes a built-in deterministic Grounded Tool Engine fallback so you can complete every step even without a cloud key or on unstable conference Wi-Fi!</em></li>
+          </ul>
+
+          <h2>Step 3.1 — Clone the Repository</h2>
+          <p>Open your terminal and run:</p>
           <pre><code>git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
 cd devfest-lagos-election-intelligence</code></pre>
-          <h2>2. Create Virtual Environment &amp; Install Dependencies</h2>
-          <p><strong>macOS / Linux / Google Cloud Shell:</strong></p>
+
+          <h2>Step 3.2 — Create Virtual Environment &amp; Install Dependencies</h2>
+          <p><strong>On macOS / Linux / Google Cloud Shell:</strong></p>
           <pre><code>python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt</code></pre>
-          <p><strong>Windows (PowerShell):</strong></p>
+
+          <p><strong>On Windows (PowerShell):</strong></p>
           <pre><code>python -m venv .venv
-.\\.venv\\Scripts\\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 pip install --upgrade pip
 pip install -r requirements.txt</code></pre>
-          <h2>3. Configure <code>.env</code> Credentials</h2>
-          <p>Copy <code>.env.example</code> to <code>.env</code> and set either your Gemini API key or Google Cloud Vertex AI project:</p>
+
+          <h2>Step 3.3 — Configure Environment Variables (<code>.env</code>)</h2>
+          <p>Copy the template environment file:</p>
           <pre><code>cp .env.example .env</code></pre>
-          <pre><code># Option 1: Gemini API Key (Google AI Studio)
-GOOGLE_API_KEY=your_api_key_here
+          <p>Open <code>.env</code> in your editor and configure either Option A (Gemini API Key) or Option B (Google Cloud Vertex AI):</p>
+          <pre><code># Option A: Google AI Studio / Gemini Developer API Key
+GOOGLE_API_KEY=your_gemini_api_key_here
 
-# Option 2: Google Cloud Vertex AI / Agent Platform
-# GOOGLE_GENAI_USE_VERTEXAI=1
-# GOOGLE_CLOUD_PROJECT=your-gcp-project-id
-# GOOGLE_CLOUD_LOCATION=us-central1
+# Option B: Google Cloud Vertex AI / Agent Platform
+GOOGLE_GENAI_USE_VERTEXAI=0
+GOOGLE_CLOUD_PROJECT=your-gcp-project-id
+GOOGLE_CLOUD_LOCATION=us-central1
 
+# Model used by all 4 ADK agents
 ADK_MODEL=gemini-2.5-flash</code></pre>
+
+          <h2>Project Directory Structure</h2>
+          <pre><code>devfest-lagos-election-intelligence/
+├── app/
+│   ├── agents/
+│   │   ├── coordinator.py          # A. Election Intelligence Coordinator (root_agent)
+│   │   └── specialists.py          # B. Research, C. Verification &amp; D. Analyst Agents
+│   ├── tools/
+│   │   └── election_tools.py       # 6 Custom ADK Function Tools + Allowlist Guardrails
+│   ├── election_intelligence/      # ADK CLI Package (`adk run` &amp; `adk web` discovery)
+│   │   ├── __init__.py
+│   │   └── agent.py
+│   ├── orchestrator.py             # ADK 2 Live Runner + Grounded Fallback Engine
+│   ├── main.py                     # FastAPI Server &amp; REST API Endpoints
+│   └── static/                     # Election Intelligence Trust Dashboard UI
+├── data/
+│   ├── election_corpus.json        # 9 Verified Tier 1–3 Electoral Documents
+│   └── trusted_sources.json        # 3-Tier Electoral Source Trust Registry
+└── tests/
+    └── test_election_agent.py      # Automated Pytest Suite (8 Verification Tests)</code></pre>
+
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Verify Your Setup:</strong><br/>
-            Run the command below to confirm <code>google-adk</code> and the verified election corpus are ready:
+            <strong>🔍 Checkpoint — Confirm Installation &amp; Data Corpus:</strong><br/>
+            Run these two commands in your terminal:
             <pre><code>adk --version
-python -c "import json; print('Loaded corpus docs:', len(json.load(open('data/election_corpus.json', encoding='utf8'))))"</code></pre>
-            Expected output: <code>adk, version 2.14.0</code> and <code>Loaded corpus docs: 9</code>.
+python -c "import json; print('Verified corpus docs:', len(json.load(open('data/election_corpus.json', encoding='utf8'))))"</code></pre>
+            <strong>Expected Output:</strong>
+            <pre><code>adk, version 2.14.0
+Verified corpus docs: 9</code></pre>
           </div>
-        `
-      },
-      {
-        title: "Build Retrieval & Source Allowlist Tools",
-        duration: 6,
-        html: `
-          <p>In Google ADK, Python functions are exposed to agents via <code>FunctionTool</code>. The LLM inspects the function's <strong>name, parameter type annotations, and docstring</strong> to determine when to call it.</p>
-          <h2>Inspect <code>app/tools/election_tools.py</code> (Retrieval &amp; Credibility)</h2>
-          <p>Open <code>app/tools/election_tools.py</code> and examine <code>search_verified_election_corpus</code> and <code>check_source_credibility</code>:</p>
-          <pre><code>def search_verified_election_corpus(query: str, category: str = "all") -> dict[str, Any]:
+
+          <div class="aside-negative">
+            <strong>🛠️ Troubleshooting:</strong><br/>
+            If PowerShell blocks script execution when running <code>.\.venv\Scripts\Activate.ps1</code>, run <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code> first, or invoke Python directly via <code>.\.venv\Scripts\python.exe</code>.
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 4: BUILD RETRIEVAL & ALLOWLIST TOOLS                      -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Build Retrieval & Allowlist Tools" data-duration="6">
+          <div class="step-header">
+            <h1>4. Give the Agent Grounded Retrieval &amp; Allowlist Tools</h1>
+            <span class="step-time-badge">Duration: 6:00</span>
+          </div>
+
+          <h2>What You Will Accomplish</h2>
+          <p>You will implement and test the three grounded retrieval and source-credibility tools in <code>app/tools/election_tools.py</code>:</p>
+          <ol>
+            <li><code>search_verified_election_corpus(query: str, category: str = "all") -&gt; dict</code></li>
+            <li><code>check_source_credibility(source_or_url: str) -&gt; dict</code></li>
+            <li><code>fetch_allowlisted_web_source(url: str) -&gt; dict</code></li>
+          </ol>
+
+          <h2>Why This Step Matters</h2>
+          <p>In Google ADK, any Python function wrapped in <code>FunctionTool(fn)</code> becomes callable by the LLM. <strong>The model reads the function's name, type annotations, and docstring</strong> to understand when to invoke it and what arguments to pass. By returning explicit <code>doc_id</code>, <code>source_tier</code>, <code>trust_score</code>, <code>published_date</code>, and <code>url</code> metadata from our tool, we force the agent to ground its answers in verifiable records.</p>
+
+          <h2>Inspect or Update <code>app/tools/election_tools.py</code> (Retrieval &amp; Source Credibility)</h2>
+          <p>Open <code>app/tools/election_tools.py</code> and examine how <code>search_verified_election_corpus</code>, <code>check_source_credibility</code>, and <code>fetch_allowlisted_web_source</code> are implemented:</p>
+          <pre><code>def search_verified_election_corpus(query: str, category: str = "all") -&gt; dict[str, Any]:
     """
     Searches the verified election intelligence corpus for official guidelines,
     electoral commission announcements, statutory laws, and accredited observer reports.
 
     Args:
-        query: The natural language search query or topic keywords.
-        category: Optional category filter ("all", "voting_procedures",
-                  "official_announcement", "fact_check", "legal_framework",
-                  "multi_source_development", or "unverified_investigation").
+        query: The natural language search query or topic keywords (e.g., "voting procedures BVAS PVC", "election date postponement").
+        category: Optional category filter. One of "all", "voting_procedures", "official_announcement", "fact_check", "legal_framework", "multi_source_development", or "unverified_investigation".
 
     Returns:
         A dictionary containing matched documents with full source attribution,
         trust tier scores, publication dates, URLs, and key facts.
-    """</code></pre>
-          <p>And inspect the domain allowlist guardrail in <code>fetch_allowlisted_web_source(url: str)</code>:</p>
-          <pre><code>def fetch_allowlisted_web_source(url: str) -> dict[str, Any]:
     """
-    Fetches live web content ONLY if the URL belongs to an allowlisted domain
-    in the Electoral Source Trust Registry. Prevents hallucinated or untrusted URLs.
-    """
-    credibility = check_source_credibility(url)
-    if not credibility.get("is_trusted"):
+    corpus = load_election_corpus()
+    registry = load_trusted_sources()
+    query_tokens = _tokenize(query)
+    q_lower = query.lower()
+
+    scored_docs: list[tuple[float, dict[str, Any]]] = []
+    for doc in corpus:
+        if category and category != "all" and doc.get("category") != category:
+            continue
+        haystack = " ".join([
+            doc.get("title", ""),
+            doc.get("summary", ""),
+            doc.get("content", ""),
+            " ".join(doc.get("topics", [])),
+            " ".join(doc.get("key_facts", [])),
+        ]).lower()
+
+        score = 0.0
+        for token in query_tokens:
+            if token in haystack:
+                score += 2.0
+            if any(token in topic.lower() for topic in doc.get("topics", [])):
+                score += 3.0
+            if token in doc.get("title", "").lower():
+                score += 2.5
+
+        for topic in doc.get("topics", []):
+            if topic.lower() in q_lower:
+                score += 4.0
+
+        if score &gt; 0:
+            tier_meta = _get_tier_metadata(doc.get("source_tier", ""), registry)
+            enriched = {
+                "doc_id": doc["doc_id"],
+                "title": doc["title"],
+                "source_name": doc["source_name"],
+                "source_tier": doc["source_tier"],
+                "tier_label": tier_meta["tier_label"],
+                "trust_score": tier_meta["trust_score"],
+                "published_date": doc["published_date"],
+                "url": doc["url"],
+                "category": doc["category"],
+                "summary": doc["summary"],
+                "content": doc["content"],
+                "key_facts": doc.get("key_facts", []),
+                "relevance_score": round(score, 2),
+            }
+            scored_docs.append((score + tier_meta["trust_score"], enriched))
+
+    scored_docs.sort(key=lambda item: item[0], reverse=True)
+    top_docs = [doc for _, doc in scored_docs[:5]]
+
+    if not top_docs:
         return {
-            "status": "blocked_untrusted_domain",
-            "url": url,
-            "credibility": credibility,
-            "message": "Access blocked by Antigravity Trust Guardrail: domain not allowlisted.",
-        }</code></pre>
+            "status": "no_verified_match",
+            "query": query,
+            "match_count": 0,
+            "documents": [],
+            "epistemic_notice": "No matching records were found in the verified election corpus. Do NOT invent facts or citations.",
+        }
+
+    return {
+        "status": "success",
+        "query": query,
+        "match_count": len(top_docs),
+        "documents": top_docs,
+    }</code></pre>
+
+          <p>And review how <code>check_source_credibility</code> and <code>fetch_allowlisted_web_source</code> enforce the 3-tier allowlist:</p>
+          <pre><code>def check_source_credibility(source_or_url: str) -&gt; dict[str, Any]:
+    """
+    Evaluates a domain, URL, or organization name against the Three-Tier Electoral
+    Source Trust Registry to determine its authority and verification rules.
+    """
+    registry = load_trusted_sources()
+    candidate = source_or_url.strip().lower()
+    parsed = urlparse(candidate if "://" in candidate else f"https://{candidate}")
+    hostname = (parsed.hostname or candidate).lower().removeprefix("www.")
+
+    for tier_key, tier_data in registry.get("tiers", {}).items():
+        for src in tier_data.get("sources", []):
+            domains = [d.lower().removeprefix("www.") for d in src.get("domains", [])]
+            if hostname in domains or any(hostname.endswith(f".{d}") for d in domains):
+                return {
+                    "status": "allowlisted",
+                    "source_id": src["source_id"],
+                    "source_name": src["name"],
+                    "tier_key": tier_key,
+                    "tier_label": tier_data["label"],
+                    "trust_score": tier_data["trust_score"],
+                    "verification_rule": tier_data["verification_rule"],
+                    "is_trusted": True,
+                }
+    return {
+        "status": "unverified_source",
+        "tier_key": "UNVERIFIED",
+        "trust_score": 0.0,
+        "is_trusted": False,
+    }</code></pre>
+
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Test Source Allowlisting &amp; Retrieval:</strong>
-            <pre><code>python -c "from app.tools.election_tools import search_verified_election_corpus, check_source_credibility; print(check_source_credibility('inecnigeria.org')['tier_key']); print(check_source_credibility('whatsapp-forward')['status']); print(search_verified_election_corpus('voting procedures')['documents'][0]['doc_id'])"</code></pre>
-            Expected output:<br/>
-            <code>TIER_1_OFFICIAL</code><br/>
-            <code>flagged_untrusted</code><br/>
-            <code>INEC-2026-PROC-01</code>
+            <strong>🔍 Checkpoint — Verify Retrieval &amp; Source Allowlist Guardrails:</strong><br/>
+            Execute the following command in your terminal:
+            <pre><code>python -c "from app.tools.election_tools import search_verified_election_corpus, check_source_credibility, fetch_allowlisted_web_source
+print('INEC Tier:', check_source_credibility('https://www.inecnigeria.org/news')['tier_key'])
+print('Untrusted URL:', fetch_allowlisted_web_source('https://breaking-naija-gossip.example.com/rumor')['status'])
+print('Top Voting Doc:', search_verified_election_corpus('What are the official voting procedures?')['documents'][0]['doc_id'])"</code></pre>
+            <strong>Expected Output:</strong>
+            <pre><code>INEC Tier: TIER_1_OFFICIAL
+Untrusted URL: blocked_untrusted_domain
+Top Voting Doc: INEC-2026-PROC-01</code></pre>
           </div>
-        `
-      },
-      {
-        title: "Build Claim Verification & Analyst Tools",
-        duration: 5,
-        html: `
-          <p>Now let's examine how <code>app/tools/election_tools.py</code> separates <strong>retrieval</strong> from <strong>verification</strong> using <code>verify_election_claim</code>, <code>get_official_announcements</code>, and <code>compare_multi_source_coverage</code>.</p>
-          <h2>Why Retrieval ≠ Verification</h2>
-          <p>If a user asks <em>"Was the November 21 election postponed to December 12?"</em>, a naive RAG pipeline retrieves an INEC press release containing the words <em>"postponed to December 12"</em> (from INEC's rebuttal) and might confuse the rumor with the truth. Our <code>verify_election_claim</code> tool evaluates source tier, statutory compliance, and explicit rebuttals to classify claims into:</p>
-          <ul>
-            <li><code>SUPPORTED</code> — Confirmed by Tier 1 official publications or corroborated Tier 2 observer reports.</li>
-            <li><code>CONTRADICTED</code> — Refuted by Tier 1 INEC communiqués, Section 47 of the Electoral Act, or forensic fact-checks.</li>
-            <li><code>INSUFFICIENT_EVIDENCE</code> — Unverified rumor, ongoing investigation (such as the Eti-Osa/Alimosho polling unit relocation claim), or missing official record.</li>
-          </ul>
-          <pre><code>def verify_election_claim(claim: str) -> dict[str, Any]:
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 5: BUILD CLAIM VERIFICATION & MULTI-SOURCE TOOLS          -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Build Verification & Analyst Tools" data-duration="5">
+          <div class="step-header">
+            <h1>5. Build the Claim Verification &amp; Multi-Source Comparison Tools</h1>
+            <span class="step-time-badge">Duration: 5:00</span>
+          </div>
+
+          <h2>What You Will Accomplish</h2>
+          <p>You will inspect and test the evidentiary reasoning and multi-source synthesis functions in <code>app/tools/election_tools.py</code>:</p>
+          <ol>
+            <li><code>verify_election_claim(claim: str) -&gt; dict</code></li>
+            <li><code>get_official_announcements(topic: str = "all") -&gt; dict</code></li>
+            <li><code>compare_multi_source_coverage(topic: str) -&gt; dict</code></li>
+          </ol>
+
+          <h2>Why This Step Matters: Separating Retrieval from Verification</h2>
+          <p>When a citizen asks <em>"Is it true that INEC postponed the November 21 election by 3 weeks to December 12?"</em>, a simple keyword search finds the phrase <em>"postponed by three weeks to December 12"</em> inside INEC's official rebuttal document (<code>[INEC-2026-FACT-02]</code>). However, that document mentions the claim in order to <strong>refute</strong> it!</p>
+          <p>Similarly, when a user asks about viral reports that <em>"42 polling units in Eti-Osa and Alimosho were secretly relocated overnight to private compounds"</em>, the Situation Room field log (<code>[YIAGA-2026-INC-09]</code>) shows that only 18 of the 42 sites have been inspected so far (with 15 unchanged at public schools and 3 shifted 30m along public streets for drainage works). Because 24 sites still await physical inspection, a trustworthy agent must return <code>INSUFFICIENT_EVIDENCE</code> rather than guessing.</p>
+
+          <h2>Inspect <code>verify_election_claim</code> and <code>compare_multi_source_coverage</code> in <code>app/tools/election_tools.py</code></h2>
+          <pre><code>def verify_election_claim(claim: str) -&gt; dict[str, Any]:
     """
     Verifies a user-submitted election claim against the verified evidence corpus,
     separating raw retrieval from evidentiary verification.
@@ -566,33 +832,74 @@ python -c "import json; print('Loaded corpus docs:', len(json.load(open('data/el
         A structured verification report with a verdict ("SUPPORTED", "CONTRADICTED",
         or "INSUFFICIENT_EVIDENCE"), confidence rating, rationale, and cited evidence.
     """</code></pre>
+
+          <p>And inspect how <code>compare_multi_source_coverage(topic: str)</code> aligns perspectives across Tier 1 (INEC), Tier 2 (YIAGA Africa &amp; DUBAWA), and Tier 3 (Channels TV):</p>
+          <pre><code>def compare_multi_source_coverage(topic: str) -&gt; dict[str, Any]:
+    """
+    Compares how multiple credible sources across Tier 1 (Official Commission),
+    Tier 2 (Accredited Observers &amp; Fact-Checkers), and Tier 3 (Verified News Media)
+    report on an election development or operational issue.
+    """
+    # Returns source_perspectives[] and synthesis_matrix:
+    # - areas_of_consensus
+    # - complementary_nuances_and_divergences
+    # - unresolved_uncertainties</code></pre>
+
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Test All Three Verification Verdicts:</strong>
-            <pre><code>python -c "from app.tools.election_tools import verify_election_claim
-print('1:', verify_election_claim('Election is on November 21, 2026')['verdict'])
-print('2:', verify_election_claim('INEC postponed election by 3 weeks to December 12')['verdict'])
-print('3:', verify_election_claim('42 polling units in Eti-Osa were secretly relocated overnight')['verdict'])"</code></pre>
-            Expected output:<br/>
-            <code>1: SUPPORTED</code><br/>
-            <code>2: CONTRADICTED</code><br/>
-            <code>3: INSUFFICIENT_EVIDENCE</code>
+            <strong>🔍 Checkpoint — Verify All 3 Epistemic Verdicts &amp; Multi-Source Matrix:</strong><br/>
+            Run this command in your terminal:
+            <pre><code>python -c "from app.tools.election_tools import verify_election_claim, compare_multi_source_coverage
+print('Nov 21 Date Claim:', verify_election_claim('The election is scheduled for Saturday, November 21, 2026')['verdict'])
+print('Dec 12 Postponement Rumor:', verify_election_claim('INEC postponed the election by 3 weeks to December 12')['verdict'])
+print('Eti-Osa Relocation Rumor:', verify_election_claim('42 polling units in Eti-Osa and Alimosho were secretly relocated overnight')['verdict'])
+print('Multi-Source Count:', compare_multi_source_coverage('BVAS and IReV')['perspectives_count'])"</code></pre>
+            <strong>Expected Output:</strong>
+            <pre><code>Nov 21 Date Claim: SUPPORTED
+Dec 12 Postponement Rumor: CONTRADICTED
+Eti-Osa Relocation Rumor: INSUFFICIENT_EVIDENCE
+Multi-Source Count: 4</code></pre>
           </div>
-        `
-      },
-      {
-        title: "Create the Specialist Sub-Agents",
-        duration: 5,
-        html: `
-          <p>In <code>app/agents/specialists.py</code>, we define our three specialized Google ADK agents using <code>google.adk.agents.Agent</code> and <code>google.adk.tools.FunctionTool</code>:</p>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 6: CREATE SPECIALIST SUB-AGENTS                           -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Create Specialist Sub-Agents" data-duration="5">
+          <div class="step-header">
+            <h1>6. Create the Election Research, Verification &amp; Analyst Sub-Agents</h1>
+            <span class="step-time-badge">Duration: 5:00</span>
+          </div>
+
+          <h2>What You Will Accomplish</h2>
+          <p>You will define the three specialized Google ADK agents inside <code>app/agents/specialists.py</code>:</p>
           <ul>
-            <li><code>election_research_agent</code> — Equipped with <code>search_verified_election_corpus</code>, <code>check_source_credibility</code>, and <code>fetch_allowlisted_web_source</code>.</li>
-            <li><code>claim_verification_agent</code> — Equipped with <code>verify_election_claim</code>, <code>search_verified_election_corpus</code>, and <code>check_source_credibility</code>.</li>
-            <li><code>election_information_analyst</code> — Equipped with <code>get_official_announcements</code>, <code>compare_multi_source_coverage</code>, and <code>search_verified_election_corpus</code>.</li>
+            <li><code>election_research_agent</code> — Retrieves official procedures and validates domain trust scores.</li>
+            <li><code>claim_verification_agent</code> — Fact-checks rumors and assigns <code>SUPPORTED</code>, <code>CONTRADICTED</code>, or <code>INSUFFICIENT_EVIDENCE</code> verdicts.</li>
+            <li><code>election_information_analyst</code> — Summarizes official INEC communiqués and compares Tier 1–3 sources.</li>
           </ul>
-          <h2>Inspect <code>app/agents/specialists.py</code></h2>
-          <pre><code>from google.adk.agents import Agent
+
+          <h2>Complete Code: <code>app/agents/specialists.py</code></h2>
+          <p>Open <code>app/agents/specialists.py</code> and confirm the full implementation:</p>
+          <pre><code>from __future__ import annotations
+
+import os
+from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
+from app.tools.election_tools import (
+    check_source_credibility,
+    compare_multi_source_coverage,
+    fetch_allowlisted_web_source,
+    get_official_announcements,
+    search_verified_election_corpus,
+    verify_election_claim,
+)
+
+MODEL_NAME = os.getenv("ADK_MODEL", "gemini-2.5-flash")
+
+# ---------------------------------------------------------------------------
+# B. Election Research Agent
+# ---------------------------------------------------------------------------
 election_research_agent = Agent(
     model=MODEL_NAME,
     name="election_research_agent",
@@ -600,7 +907,13 @@ election_research_agent = Agent(
         "Retrieves verified election procedures, statutory provisions, and official "
         "records from allowlisted sources, and evaluates source credibility tiers."
     ),
-    instruction="""You are the Election Research Agent in a trustworthy Election Intelligence system...""",
+    instruction="""You are the Election Research Agent in a trustworthy Election Intelligence system.
+Your sole responsibility is grounded information retrieval and source credibility evaluation:
+1. Always call `search_verified_election_corpus` first to retrieve official INEC guidelines, Electoral Act sections, and accredited observer reports.
+2. When a user asks about a specific domain, website, or viral source, call `check_source_credibility` or `fetch_allowlisted_web_source`.
+3. Prioritize Tier 1 (Statutory &amp; Electoral Commission) sources for procedures and dates, followed by Tier 2 (Accredited Election Observers &amp; Fact-Checkers) and Tier 3 (Verified News Media).
+4. Cite every retrieved fact using its exact `[doc_id]`, `source_name`, `published_date`, and `url`.
+5. Never invent election procedures, candidate statements, polling dates, or URLs. If the corpus has no match, explicitly state that verified information is unavailable.""",
     tools=[
         FunctionTool(search_verified_election_corpus),
         FunctionTool(check_source_credibility),
@@ -608,6 +921,9 @@ election_research_agent = Agent(
     ],
 )
 
+# ---------------------------------------------------------------------------
+# C. Claim Verification Agent
+# ---------------------------------------------------------------------------
 claim_verification_agent = Agent(
     model=MODEL_NAME,
     name="claim_verification_agent",
@@ -615,28 +931,113 @@ claim_verification_agent = Agent(
         "Verifies user-submitted election claims, rumors, or statements against "
         "available evidence and assigns SUPPORTED, CONTRADICTED, or INSUFFICIENT_EVIDENCE verdicts."
     ),
-    instruction="""You are the Claim Verification Agent... RETRIEVAL IS NOT VERIFICATION...""",
+    instruction="""You are the Claim Verification Agent in a trustworthy Election Intelligence system.
+Your core principle is that RETRIEVAL IS NOT VERIFICATION: finding a statement online does not make it true.
+When handling any claim or "Is it true..." question:
+1. Always invoke `verify_election_claim` with the user's claim, and optionally `check_source_credibility` if a source is mentioned.
+2. Begin your response with the explicit Verification Verdict:
+   - `SUPPORTED`: Backed by Tier 1 statutory/commission evidence or corroborated Tier 2 observer data.
+   - `CONTRADICTED`: Directly refuted by official INEC records, Electoral Act provisions, or forensic fact-checks.
+   - `INSUFFICIENT_EVIDENCE`: Unverified rumor, ongoing investigation, or missing authoritative records.
+3. Explain the evidentiary reasoning clearly, citing exact `[doc_id]` references, source tiers, and publication dates.
+4. Never make a definitive conclusion when evidence is inadequate or inconclusive.""",
     tools=[
         FunctionTool(verify_election_claim),
         FunctionTool(search_verified_election_corpus),
         FunctionTool(check_source_credibility),
     ],
+)
+
+# ---------------------------------------------------------------------------
+# D. Election Information Analyst
+# ---------------------------------------------------------------------------
+election_information_analyst = Agent(
+    model=MODEL_NAME,
+    name="election_information_analyst",
+    description=(
+        "Summarizes official electoral commission announcements, extracts key dates "
+        "and voting steps, and compares coverage across multiple credible sources."
+    ),
+    instruction="""You are the Election Information Analyst in a trustworthy Election Intelligence system.
+Your role is to synthesize complex electoral documents into clear, accurate, citizen-friendly briefings:
+1. For requests to summarize official announcements or key dates, call `get_official_announcements`.
+2. For requests comparing what different credible sources say about a development (such as BVAS/IReV readiness or logistics), call `compare_multi_source_coverage`.
+3. Clearly separate:
+   - **Consensus Across Sources** (where Tier 1, Tier 2, and Tier 3 agree)
+   - **Nuances &amp; Operational Perspectives** (how official assurances compare with independent observer field reports)
+   - **Open Uncertainties** (what remains unverified or pending)
+4. Preserve all `[doc_id]` citations, publication dates, and source URLs.""",
+    tools=[
+        FunctionTool(get_official_announcements),
+        FunctionTool(compare_multi_source_coverage),
+        FunctionTool(search_verified_election_corpus),
+    ],
 )</code></pre>
+
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Confirm Specialist Agent Instantiation:</strong>
-            <pre><code>python -c "from app.agents.specialists import election_research_agent, claim_verification_agent, election_information_analyst; print([a.name for a in (election_research_agent, claim_verification_agent, election_information_analyst)])"</code></pre>
-            Expected output:<br/>
-            <code>['election_research_agent', 'claim_verification_agent', 'election_information_analyst']</code>
+            <strong>🔍 Checkpoint — Verify Specialist Agents &amp; Registered Tools:</strong><br/>
+            Run this check in your terminal:
+            <pre><code>python -c "from app.agents.specialists import election_research_agent, claim_verification_agent, election_information_analyst
+for ag in (election_research_agent, claim_verification_agent, election_information_analyst):
+    print(ag.name, '-&gt; tools:', len(ag.tools))"</code></pre>
+            <strong>Expected Output:</strong>
+            <pre><code>election_research_agent -&gt; tools: 3
+claim_verification_agent -&gt; tools: 3
+election_information_analyst -&gt; tools: 3</code></pre>
           </div>
-        `
-      },
-      {
-        title: "Build the Coordinator & Connect Agents",
-        duration: 4,
-        html: `
-          <p>Now connect all three specialists under the <strong>Election Intelligence Coordinator</strong> (<code>root_agent</code>) in <code>app/agents/coordinator.py</code> and expose it in <code>app/election_intelligence/agent.py</code>.</p>
-          <h2>Inspect <code>app/agents/coordinator.py</code></h2>
-          <pre><code>election_intelligence_coordinator = Agent(
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 7: BUILD THE COORDINATOR & CONNECT AGENTS                 -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Build the Coordinator Agent" data-duration="4">
+          <div class="step-header">
+            <h1>7. Build the Coordinator and Connect the Multi-Agent System</h1>
+            <span class="step-time-badge">Duration: 4:00</span>
+          </div>
+
+          <h2>What You Will Accomplish</h2>
+          <p>You will wire the <strong>Election Intelligence Coordinator</strong> (<code>root_agent</code>) in <code>app/agents/coordinator.py</code> and expose it via <code>app/election_intelligence/agent.py</code> so that ADK's CLI (<code>adk run</code>), ADK's Web UI (<code>adk web</code>), and our FastAPI Trust Dashboard all orchestrate the exact same multi-agent hierarchy.</p>
+
+          <h2>Complete Code: <code>app/agents/coordinator.py</code></h2>
+          <pre><code>from __future__ import annotations
+
+from google.adk.agents import Agent
+from google.adk.tools import FunctionTool
+
+from app.agents.specialists import (
+    MODEL_NAME,
+    claim_verification_agent,
+    election_information_analyst,
+    election_research_agent,
+)
+from app.tools.election_tools import (
+    check_source_credibility,
+    compare_multi_source_coverage,
+    get_official_announcements,
+    search_verified_election_corpus,
+    verify_election_claim,
+)
+
+COORDINATOR_INSTRUCTION = """You are the **Election Intelligence Coordinator**, the lead orchestrator of a trustworthy multi-agent Election Intelligence application built with Google ADK.
+
+Your mission is to help citizens, journalists, and observers access accurate, grounded, and verifiable election information while actively preventing misinformation and hallucination.
+
+### How to Coordinate Your Specialist Sub-Agents
+Delegate or invoke tools based on the user's intent:
+1. **Official Voting Procedures, Legal Rules &amp; General Lookup** -&gt; Delegate to `election_research_agent` (or use `search_verified_election_corpus`).
+2. **Fact-Checking Rumors, Viral Claims &amp; "Can you verify..." Queries** -&gt; Delegate to `claim_verification_agent` (or use `verify_election_claim`).
+3. **Summarizing Official Announcements or Comparing Multiple Credible Sources** -&gt; Delegate to `election_information_analyst` (or use `get_official_announcements` / `compare_multi_source_coverage`).
+
+### Mandatory Trust &amp; Epistemic Guardrails
+- **Retrieval != Verification**: Always distinguish between the authority of a source (Tier 1 Statutory/INEC, Tier 2 Accredited Observer/Fact-Checker, Tier 3 Verified Media) and the conclusion drawn.
+- **Explicit Verification Status**: State clearly whether a claim or topic is `SUPPORTED`, `CONTRADICTED`, `INSUFFICIENT_EVIDENCE`, or `OFFICIAL_GUIDANCE`.
+- **Strict Source Attribution**: Cite every claim using `[doc_id]` (e.g., `[INEC-2026-PROC-01]`, `[YIAGA-2026-OBS-01]`), the source name, publication date, and official URL.
+- **Transparent Uncertainty**: When evidence is incomplete, conflicting, or unverified (such as the Eti-Osa/Alimosho polling unit relocation rumors), explicitly state what is known, what is unverified, and why no definitive conclusion can be drawn.
+- **Zero Fabrication**: Never invent election results, voting procedures, candidate statements, or URLs.
+"""
+
+election_intelligence_coordinator = Agent(
     model=MODEL_NAME,
     name="election_intelligence_coordinator",
     description=(
@@ -661,187 +1062,275 @@ claim_verification_agent = Agent(
 
 # ADK CLI (`adk run` and `adk web`) discovers `root_agent` by convention
 root_agent = election_intelligence_coordinator</code></pre>
-          <h2>How ADK Multi-Agent Delegation Works</h2>
-          <p>When you pass <code>sub_agents=[...]</code> to <code>election_intelligence_coordinator</code>, Google ADK automatically equips the coordinator with a built-in <code>transfer_to_agent(agent_name=...)</code> capability and inspects each sub-agent's <code>name</code> and <code>description</code> to route requests dynamically.</p>
+
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Verify Root Agent &amp; Sub-Agents:</strong>
-            <pre><code>python -c "from app.election_intelligence.agent import root_agent; print(root_agent.name, '->', [sa.name for sa in root_agent.sub_agents])"</code></pre>
-            Expected output:<br/>
-            <code>election_intelligence_coordinator -> ['election_research_agent', 'claim_verification_agent', 'election_information_analyst']</code>
+            <strong>🔍 Checkpoint — Verify Root Coordinator &amp; Sub-Agent Graph:</strong><br/>
+            <pre><code>python -c "from app.election_intelligence.agent import root_agent
+print('Root Agent:', root_agent.name)
+print('Model:', root_agent.model)
+print('Sub-Agents:', [sa.name for sa in root_agent.sub_agents])"</code></pre>
+            <strong>Expected Output:</strong>
+            <pre><code>Root Agent: election_intelligence_coordinator
+Model: gemini-2.5-flash
+Sub-Agents: ['election_research_agent', 'claim_verification_agent', 'election_information_analyst']</code></pre>
           </div>
-        `
-      },
-      {
-        title: "Run & Test the Application",
-        duration: 4,
-        html: `
-          <p>It's time to run our automated verification test suite and launch the interactive application!</p>
-          <h2>1. Run the Automated Test Suite (<code>pytest</code>)</h2>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 8: RUN & TEST THE APPLICATION                             -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Run and Test the Application" data-duration="4">
+          <div class="step-header">
+            <h1>8. Run and Test the Application</h1>
+            <span class="step-time-badge">Duration: 4:00</span>
+          </div>
+
+          <h2>Step 8.1 — Run the Automated Pytest Verification Suite</h2>
+          <p>Before launching the web interface, run the automated test suite in <code>tests/test_election_agent.py</code> to validate agent hierarchy, intent delegation, tool execution, source attribution, contradicted rumor detection, and insufficient evidence guardrails:</p>
           <pre><code>pytest -v</code></pre>
-          <p>You should see all <strong>8 test cases pass</strong>, verifying agent hierarchy, intent delegation, retrieval, source attribution, contradicted rumors, insufficient evidence handling, multi-source comparison, and FastAPI endpoints:</p>
-          <pre><code>tests/test_election_agent.py::test_adk_agent_hierarchy_and_tools PASSED
-tests/test_election_agent.py::test_agent_delegation_routing PASSED
-tests/test_election_agent.py::test_retrieval_and_source_attribution PASSED
-tests/test_election_agent.py::test_claim_verification_contradicted_rumors PASSED
-tests/test_election_agent.py::test_claim_verification_insufficient_evidence PASSED
-tests/test_election_agent.py::test_multi_source_comparison_and_conflicting_nuances PASSED
-tests/test_election_agent.py::test_source_credibility_and_untrusted_retrieval_guardrail PASSED
-tests/test_election_agent.py::test_fastapi_endpoints_and_demo_questions PASSED
-========================= 8 passed in 2.60s =========================</code></pre>
-          <h2>2. Launch the Election Intelligence Trust Dashboard</h2>
+          <p><strong>Expected Output:</strong></p>
+          <pre><code>tests/test_election_agent.py::test_adk_agent_hierarchy_and_tools PASSED  [ 12%]
+tests/test_election_agent.py::test_agent_delegation_routing PASSED       [ 25%]
+tests/test_election_agent.py::test_retrieval_and_source_attribution PASSED [ 37%]
+tests/test_election_agent.py::test_claim_verification_contradicted_rumors PASSED [ 50%]
+tests/test_election_agent.py::test_claim_verification_insufficient_evidence PASSED [ 62%]
+tests/test_election_agent.py::test_multi_source_comparison_and_conflicting_nuances PASSED [ 75%]
+tests/test_election_agent.py::test_source_credibility_and_untrusted_retrieval_guardrail PASSED [ 87%]
+tests/test_election_agent.py::test_fastapi_endpoints_and_demo_questions PASSED [100%]
+
+======================== 8 passed in 2.60s =========================</code></pre>
+
+          <h2>Step 8.2 — Launch the Election Intelligence Trust Dashboard</h2>
+          <p>Start the FastAPI application server on port <code>8080</code>:</p>
           <pre><code>uvicorn app.main:app --reload --port 8080</code></pre>
-          <p>Open <code>http://localhost:8080</code> in your browser. You can also test directly in ADK's developer playground or terminal:</p>
-          <pre><code># Interactive ADK Terminal CLI
+          <p>Now open <strong><code>http://localhost:8080</code></strong> in your browser (or open the live deployed app at <a href="/" target="_blank" rel="noopener">https://devfest-lagos-election-agent-2026.web.app</a>).</p>
+
+          <h2>Step 8.3 — (Optional) Test with ADK CLI &amp; ADK Web UI</h2>
+          <p>Because our agent package in <code>app/election_intelligence/</code> follows standard ADK conventions, you can also run it directly in ADK's terminal runner or built-in developer playground:</p>
+          <pre><code># Run interactively in the terminal CLI
 adk run app/election_intelligence
 
-# Interactive ADK Web Playground (port 8000)
+# Or launch the ADK Developer Web UI on port 8000
 adk web app</code></pre>
+
           <div class="aside-negative">
-            <strong>🛠️ Troubleshooting Note:</strong> If port <code>8080</code> is already in use, pass <code>--port 8081</code> to <code>uvicorn</code>. If running without a cloud API key, the dashboard automatically uses the built-in Grounded ADK Tool Engine so every feature works offline.
+            <strong>🛠️ Troubleshooting Common Errors:</strong>
+            <ul>
+              <li><strong><code>ModuleNotFoundError: No module named 'app'</code></strong>: Make sure your terminal working directory is the project root (<code>devfest-lagos-election-intelligence</code>) and your virtual environment (<code>.venv</code>) is activated.</li>
+              <li><strong>Port 8080 already in use:</strong> Pass <code>--port 8081</code> to <code>uvicorn</code> and open <code>http://localhost:8081</code>.</li>
+              <li><strong>Missing API Key or Quota Exceeded:</strong> The orchestrator in <code>app/orchestrator.py</code> automatically falls back to the built-in Grounded ADK Tool Engine if live LLM credentials are absent or rate-limited, ensuring zero downtime during the workshop.</li>
+            </ul>
           </div>
-        `
-      },
-      {
-        title: "Evaluate with Sample Election Questions",
-        duration: 3,
-        html: `
-          <p>Use the <strong>Election Intelligence Trust Dashboard</strong> (<a href="/" target="_blank">open live app</a> or <code>http://localhost:8080</code>) to evaluate all five required conference test cases:</p>
-          <table>
-            <thead>
-              <tr><th>Test Question / Claim</th><th>Delegated Specialist</th><th>Expected Verdict</th><th>Primary Citations</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><em>"What are the official voting procedures for this election?"</em></td>
-                <td><code>election_research_agent</code></td>
-                <td><code>SUPPORTED</code></td>
-                <td><code>[INEC-2026-PROC-01]</code>, <code>[ELECTORAL-ACT-2022-S47]</code></td>
-              </tr>
-              <tr>
-                <td><em>"Summarize the latest announcement from the electoral commission."</em></td>
-                <td><code>election_information_analyst</code></td>
-                <td><code>SUPPORTED</code></td>
-                <td><code>[INEC-2026-PRESS-04]</code></td>
-              </tr>
-              <tr>
-                <td><em>"Can you verify this claim about the election date: Has INEC postponed the November 21 election by 3 weeks to December 12?"</em></td>
-                <td><code>claim_verification_agent</code></td>
-                <td><code>CONTRADICTED</code></td>
-                <td><code>[INEC-2026-FACT-02]</code>, <code>[INEC-2026-PRESS-04]</code></td>
-              </tr>
-              <tr>
-                <td><em>"What do different credible sources say about BVAS offline accreditation, IReV result transmission, and election logistics readiness?"</em></td>
-                <td><code>election_information_analyst</code></td>
-                <td><code>MULTI_SOURCE_SYNTHESIS</code></td>
-                <td><code>[INEC-2026-TECH-03]</code>, <code>[YIAGA-2026-OBS-01]</code>, <code>[DUBAWA-2026-CHECK-07]</code>, <code>[CHANNELS-2026-NEWS-11]</code></td>
-              </tr>
-              <tr>
-                <td><em>"Is there sufficient evidence to support this statement: 42 polling units in Eti-Osa and Alimosho were secretly relocated overnight to private compounds?"</em></td>
-                <td><code>claim_verification_agent</code></td>
-                <td><code>INSUFFICIENT_EVIDENCE</code></td>
-                <td><code>[YIAGA-2026-INC-09]</code></td>
-              </tr>
-            </tbody>
-          </table>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 9: EVALUATE SAMPLE ELECTION QUESTIONS                     -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Evaluate Sample Questions" data-duration="3">
+          <div class="step-header">
+            <h1>9. Evaluate Responses Using Sample Election Questions</h1>
+            <span class="step-time-badge">Duration: 3:00</span>
+          </div>
+
+          <p>In the <strong>Election Intelligence Trust Dashboard</strong> (<a href="/" target="_blank" rel="noopener">open live dashboard</a> or <code>http://localhost:8080</code>), test the five core scenarios below and observe how the system coordinates agents, cites sources, and communicates uncertainty:</p>
+
+          <h2>Scenario 1 — Official Voting Procedures (<code>SUPPORTED</code>)</h2>
+          <ul>
+            <li><strong>Query:</strong> <code>"What are the official voting procedures for this election?"</code></li>
+            <li><strong>Delegation Path:</strong> <code>election_intelligence_coordinator</code> &rarr; <code>election_research_agent</code> &rarr; <code>search_verified_election_corpus</code></li>
+            <li><strong>Expected Behavior:</strong> Returns step-by-step continuous accreditation and voting rules grounded in <code>[INEC-2026-PROC-01]</code> and <code>[ELECTORAL-ACT-2022-S47]</code> (polls open 8:30 AM – 2:30 PM WAT, mandatory physical PVC, bimodal BVAS fingerprint/facial verification, Form EC8A counting, and IReV portal upload).</li>
+          </ul>
+
+          <h2>Scenario 2 — Summarize Official Commission Announcement (<code>SUPPORTED</code>)</h2>
+          <ul>
+            <li><strong>Query:</strong> <code>"Summarize the latest announcement from the electoral commission."</code></li>
+            <li><strong>Delegation Path:</strong> <code>election_intelligence_coordinator</code> &rarr; <code>election_information_analyst</code> &rarr; <code>get_official_announcements</code></li>
+            <li><strong>Expected Behavior:</strong> Summarizes <code>[INEC-2026-PRESS-04]</code> (November 8, 2026 communiqué) confirming the Saturday, November 21, 2026 election date, the Sunday, November 15, 2026 (5:00 PM WAT) final PVC collection deadline at LGA offices, and the 98.4% BVAS mock accreditation success rate.</li>
+          </ul>
+
+          <h2>Scenario 3 — Verify Election Date Postponement Claim (<code>CONTRADICTED</code>)</h2>
+          <ul>
+            <li><strong>Query:</strong> <code>"Can you verify this claim about the election date: Has INEC postponed the November 21 election by 3 weeks to December 12?"</code></li>
+            <li><strong>Delegation Path:</strong> <code>election_intelligence_coordinator</code> &rarr; <code>claim_verification_agent</code> &rarr; <code>verify_election_claim</code></li>
+            <li><strong>Expected Behavior:</strong> Displays a red <code>VERDICT: CONTRADICTED</code> badge and cites INEC Disinformation Alert <code>[INEC-2026-FACT-02]</code> and <code>[INEC-2026-PRESS-04]</code> refuting the viral WhatsApp postponement rumor.</li>
+          </ul>
+
+          <h2>Scenario 4 — Compare Multiple Credible Sources (<code>MULTI_SOURCE_SYNTHESIS</code>)</h2>
+          <ul>
+            <li><strong>Query:</strong> <code>"What do different credible sources say about BVAS offline accreditation, IReV result transmission, and election logistics readiness?"</code></li>
+            <li><strong>Delegation Path:</strong> <code>election_intelligence_coordinator</code> &rarr; <code>election_information_analyst</code> &rarr; <code>compare_multi_source_coverage</code></li>
+            <li><strong>Expected Behavior:</strong> Synthesizes Tier 1 (<code>[INEC-2026-TECH-03]</code>), Tier 2 (<code>[YIAGA-2026-OBS-01]</code>, <code>[DUBAWA-2026-CHECK-07]</code>), and Tier 3 (<code>[CHANNELS-2026-NEWS-11]</code>), highlighting consensus on offline BVAS verification (~98%) alongside observer warnings about cellular dead-zones in 8.2% of riverine/rural polling units.</li>
+          </ul>
+
+          <h2>Scenario 5 — Deliberately Unsupported / Inconclusive Claim (<code>INSUFFICIENT_EVIDENCE</code>)</h2>
+          <ul>
+            <li><strong>Query:</strong> <code>"Is there sufficient evidence to support this statement: 42 polling units in Eti-Osa and Alimosho were secretly relocated overnight to private compounds?"</code></li>
+            <li><strong>Delegation Path:</strong> <code>election_intelligence_coordinator</code> &rarr; <code>claim_verification_agent</code> &rarr; <code>verify_election_claim</code></li>
+            <li><strong>Expected Behavior:</strong> Displays an amber <code>VERDICT: INSUFFICIENT_EVIDENCE</code> epistemic warning banner. Explains via Situation Room Field Log <code>[YIAGA-2026-INC-09]</code> that INEC's directory shows zero authorized changes, 15 of 18 inspected sites remain at public schools, 3 shifted 30m along public streets for drainage works, and 24 sites are still awaiting physical verification.</li>
+          </ul>
+
           <div class="aside-positive">
-            <strong>🔍 Final Validation Checkpoint:</strong> Click the <strong>Unsupported Relocation Claim</strong> button in the dashboard and verify that the yellow <code>INSUFFICIENT_EVIDENCE</code> epistemic warning banner appears and explains why only 18 of 42 sites have been inspected so far.
+            <strong>🔍 Checkpoint — Test the Source Credibility Inspector:</strong><br/>
+            In the left sidebar of the dashboard under <strong>Source Credibility Allowlist Tool</strong>, click the <code>whatsapp-forward</code> chip and verify it returns <code>🚫 UNTRUSTED / BLOCKED • Trust Score: 0</code>.
           </div>
-        `
-      },
-      {
-        title: "Key Takeaways & Further Learning",
-        duration: 1,
-        html: `
-          <p>🎉 <strong>Congratulations!</strong> You have completed the DevFest Lagos 2026 hands-on codelab and built a production-ready, trustworthy multi-agent Election Intelligence application with Google ADK.</p>
-          <h2>What You Accomplished</h2>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- STEP 10: KEY TAKEAWAYS & REFERENCES                            -->
+        <!-- ============================================================== -->
+        <section class="codelab-step" data-title="Key Takeaways & Further Learning" data-duration="1">
+          <div class="step-header">
+            <h1>10. Key Takeaways &amp; Further Learning</h1>
+            <span class="step-time-badge">Duration: 1:00</span>
+          </div>
+
+          <p>🎉 <strong>Congratulations!</strong> You have built, tested, and verified a <strong>Trustworthy Multi-Agent Election Intelligence Application</strong> using <strong>Google ADK</strong> and the <strong>Antigravity Harness</strong>.</p>
+
+          <h2>Key Architectural Takeaways</h2>
+          <ol>
+            <li><strong>Multi-Agent Separation of Responsibilities:</strong> Splitting coordination (<code>election_intelligence_coordinator</code>), grounded retrieval (<code>election_research_agent</code>), evidentiary claim verification (<code>claim_verification_agent</code>), and multi-source synthesis (<code>election_information_analyst</code>) produces modular, auditable agent behavior.</li>
+            <li><strong>Retrieval &ne; Verification:</strong> Finding a keyword match in a corpus or search engine does not make a claim true. Trustworthy agents evaluate <strong>source tier authority</strong>, <strong>corroboration across independent observers</strong>, and <strong>statutory compliance</strong>.</li>
+            <li><strong>Epistemic Humility by Design:</strong> In high-stakes domains like elections, healthcare, finance, and law, an AI system must clearly state when a claim is <code>INSUFFICIENT_EVIDENCE</code> rather than guessing or fabricating citations.</li>
+          </ol>
+
+          <h2>Further Learning &amp; Useful References</h2>
           <ul>
-            <li>Designed a <strong>4-agent Google ADK architecture</strong> separating Coordination, Research, Claim Verification, and Multi-Source Analysis.</li>
-            <li>Implemented <strong>6 ADK Function Tools</strong> backed by a 3-Tier Electoral Source Trust Registry and verified statutory/observer documents.</li>
-            <li>Enforced <strong>Retrieval ≠ Verification</strong> and transparent uncertainty communication (<code>SUPPORTED</code>, <code>CONTRADICTED</code>, <code>INSUFFICIENT_EVIDENCE</code>).</li>
-            <li>Tested and validated the system across automated <code>pytest</code> checks and live election misinformation scenarios.</li>
+            <li><a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener">Google Agent Development Kit (ADK) Official Documentation</a></li>
+            <li><a href="https://codelabs.developers.google.com/devsite/codelabs/build-agents-with-adk-foundation?hl=en#0" target="_blank" rel="noopener">Building AI Agents with ADK: The Foundation (Google Codelab)</a></li>
+            <li><a href="https://codelabs.developers.google.com/devsite/codelabs/build-agents-with-adk-empowering-with-tools?hl=en#0" target="_blank" rel="noopener">Building AI Agents with ADK: Empowering with Tools</a></li>
+            <li><a href="https://codelabs.developers.google.com/devsite/codelabs/build-agents-with-adk-orchestrating-agent-workflows?hl=en#0" target="_blank" rel="noopener">Building AI Agents with ADK: Orchestrating Agent Workflows</a></li>
+            <li><a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener">DevFest Lagos 2026 Election Intelligence GitHub Repository</a></li>
           </ul>
-          <h2>Further Learning &amp; Official References</h2>
-          <ul>
-            <li><a href="https://google.github.io/adk-docs/" target="_blank">Google Agent Development Kit (ADK) Official Documentation</a></li>
-            <li><a href="https://codelabs.developers.google.com/devsite/codelabs/build-agents-with-adk-foundation?hl=en#0" target="_blank">Google Codelab: Building AI Agents with ADK — The Foundation</a></li>
-            <li><a href="https://codelabs.solace.dev/codelabs/codelab-4-codelab/?index=..%2F..index#0" target="_blank">Solace Codelab Instructional Blueprint</a></li>
-            <li><a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank">DevFest Lagos 2026 Workshop GitHub Repository</a></li>
-          </ul>
-        `
-      }
-    ];
+        </section>
 
-    let currentStep = 0;
+      </article>
 
-    function renderCodelab() {
-      const drawer = document.getElementById("drawer");
-      drawer.innerHTML = STEPS.map((s, idx) => `
-        <div class="step-nav-item ${idx === currentStep ? 'active' : ''} ${idx < currentStep ? 'completed' : ''}" onclick="goToStep(${idx})">
-          <div class="step-circle">${idx < currentStep ? '✓' : idx + 1}</div>
-          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.title}</span>
-          <span class="step-duration-tag">${s.duration}m</span>
-        </div>
-      `).join("");
+      <div class="step-footer">
+        <button class="nav-btn" id="prev-btn" type="button">← Previous Step</button>
+        <button class="nav-btn primary" id="next-btn" type="button">Next Step →</button>
+      </div>
+    </main>
+  </div>
 
-      const step = STEPS[currentStep];
-      document.getElementById("step-title").textContent = `${currentStep + 1}. ${step.title}`;
-      document.getElementById("step-duration").textContent = `Duration: ${step.duration}:00`;
-      document.getElementById("step-content").innerHTML = step.html;
+  <script>
+    (function () {
+      var stepSections = Array.prototype.slice.call(document.querySelectorAll(".codelab-step"));
+      var drawer = document.getElementById("drawer");
+      var prevBtn = document.getElementById("prev-btn");
+      var nextBtn = document.getElementById("next-btn");
+      var timeRemainingEl = document.getElementById("time-remaining");
+      var mainScroll = document.getElementById("main-scroll");
+      var currentStep = 0;
 
-      const minsLeft = STEPS.slice(currentStep).reduce((acc, s) => acc + s.duration, 0);
-      document.getElementById("time-remaining").textContent = `⏱️ ${minsLeft} mins left`;
-
-      document.getElementById("prev-btn").disabled = currentStep === 0;
-      const nextBtn = document.getElementById("next-btn");
-      if (currentStep === STEPS.length - 1) {
-        nextBtn.textContent = "Launch Live App 🚀";
-      } else {
-        nextBtn.textContent = "Next Step →";
-      }
-
-      // Attach Copy buttons to code blocks
-      document.querySelectorAll(".step-content pre").forEach((pre) => {
-        const btn = document.createElement("button");
+      // Add copy buttons to all <pre> blocks once
+      var preBlocks = document.querySelectorAll(".codelab-step pre");
+      Array.prototype.forEach.call(preBlocks, function (pre) {
+        var btn = document.createElement("button");
         btn.className = "copy-btn";
+        btn.type = "button";
         btn.textContent = "Copy";
-        btn.onclick = () => {
-          navigator.clipboard.writeText(pre.innerText.replace(/Copy$/, "").trim());
+        btn.addEventListener("click", function () {
+          var codeEl = pre.querySelector("code");
+          var textToCopy = codeEl ? codeEl.innerText : pre.innerText;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy.trim());
+          }
           btn.textContent = "Copied!";
-          setTimeout(() => (btn.textContent = "Copy"), 1500);
-        };
+          setTimeout(function () {
+            btn.textContent = "Copy";
+          }, 1500);
+        });
         pre.appendChild(btn);
       });
 
-      document.getElementById("main-scroll").scrollTop = 0;
-      window.location.hash = `#${currentStep}`;
-    }
+      function renderStep(index) {
+        if (index < 0 || index >= stepSections.length) return;
+        currentStep = index;
 
-    function goToStep(idx) {
-      if (idx >= 0 && idx < STEPS.length) {
-        currentStep = idx;
-        renderCodelab();
+        // Toggle active step visibility
+        stepSections.forEach(function (sec, idx) {
+          if (idx === currentStep) {
+            sec.classList.add("active-step");
+          } else {
+            sec.classList.remove("active-step");
+          }
+        });
+
+        // Build left navigation items
+        drawer.innerHTML = "";
+        var minsRemaining = 0;
+        stepSections.forEach(function (sec, idx) {
+          var title = sec.getAttribute("data-title") || ("Step " + (idx + 1));
+          var dur = parseInt(sec.getAttribute("data-duration") || "3", 10);
+          if (idx >= currentStep) {
+            minsRemaining += dur;
+          }
+
+          var navItem = document.createElement("div");
+          navItem.className = "step-nav-item" +
+            (idx === currentStep ? " active" : "") +
+            (idx < currentStep ? " completed" : "");
+
+          var circle = document.createElement("div");
+          circle.className = "step-circle";
+          circle.textContent = idx < currentStep ? "✓" : String(idx + 1);
+
+          var label = document.createElement("span");
+          label.style.overflow = "hidden";
+          label.style.textOverflow = "ellipsis";
+          label.style.whiteSpace = "nowrap";
+          label.textContent = title;
+
+          var durTag = document.createElement("span");
+          durTag.className = "step-duration-tag";
+          durTag.textContent = dur + "m";
+
+          navItem.appendChild(circle);
+          navItem.appendChild(label);
+          navItem.appendChild(durTag);
+          navItem.addEventListener("click", function () {
+            renderStep(idx);
+          });
+          drawer.appendChild(navItem);
+        });
+
+        timeRemainingEl.textContent = "⏱️ " + minsRemaining + " mins left";
+        prevBtn.disabled = currentStep === 0;
+        nextBtn.textContent = currentStep === stepSections.length - 1 ? "Launch Live App 🚀" : "Next Step →";
+        mainScroll.scrollTop = 0;
+        if (history.replaceState) {
+          history.replaceState(null, "", "#" + currentStep);
+        }
       }
-    }
 
-    document.getElementById("prev-btn").addEventListener("click", () => goToStep(currentStep - 1));
-    document.getElementById("next-btn").addEventListener("click", () => {
-      if (currentStep === STEPS.length - 1) {
-        window.location.href = "/";
+      prevBtn.addEventListener("click", function () {
+        if (currentStep > 0) renderStep(currentStep - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        if (currentStep < stepSections.length - 1) {
+          renderStep(currentStep + 1);
+        } else {
+          window.location.href = "/";
+        }
+      });
+
+      window.addEventListener("keydown", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) return;
+        if (e.key === "ArrowRight" && currentStep < stepSections.length - 1) {
+          renderStep(currentStep + 1);
+        } else if (e.key === "ArrowLeft" && currentStep > 0) {
+          renderStep(currentStep - 1);
+        }
+      });
+
+      var initialHash = parseInt(window.location.hash.replace("#", ""), 10);
+      if (!isNaN(initialHash) && initialHash >= 0 && initialHash < stepSections.length) {
+        renderStep(initialHash);
       } else {
-        goToStep(currentStep + 1);
+        renderStep(0);
       }
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight" && currentStep < STEPS.length - 1) goToStep(currentStep + 1);
-      if (e.key === "ArrowLeft" && currentStep > 0) goToStep(currentStep - 1);
-    });
-
-    const hashIdx = parseInt(window.location.hash.replace("#", ""), 10);
-    if (!isNaN(hashIdx) && hashIdx >= 0 && hashIdx < STEPS.length) {
-      currentStep = hashIdx;
-    }
-    renderCodelab();
+    })();
   </script>
 </body>
 </html>
