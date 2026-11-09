@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "devfest-ng-election-2026"
+  },
+  "targets": {
+    "devfest-ng-election-2026": {
+      "hosting": {
+        "lagos-election-agent": [
+          "devfest-lagos-election-agent-2026"
+        ]
+      }
+    }
+  }
+}

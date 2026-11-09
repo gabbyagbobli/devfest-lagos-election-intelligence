@@ -1,0 +1,166 @@
+[
+  {
+    "doc_id": "INEC-2026-PROC-01",
+    "title": "INEC 2026 Regulations and Guidelines for the Conduct of Elections: Polling Unit Accreditation & Voting Procedure",
+    "source_id": "SRC-INEC",
+    "source_name": "Independent National Electoral Commission (INEC)",
+    "source_tier": "TIER_1_OFFICIAL",
+    "url": "https://www.inecnigeria.org/wp-content/uploads/2026/10/INEC-Regulations-and-Guidelines-2026.pdf",
+    "published_date": "2026-10-15",
+    "category": "voting_procedures",
+    "topics": ["voting procedure", "accreditation", "BVAS", "PVC", "polling unit", "hours", "IReV", "EC8A"],
+    "summary": "Official step-by-step continuous accreditation and voting procedure at all Polling Units nationwide.",
+    "content": "OFFICIAL POLLING UNIT PROCEDURE (CONTINUOUS ACCREDITATION AND VOTING):\n1. Opening of Polls: Polling Units open strictly at 8:30 AM WAT and close at 2:30 PM WAT. Any voter already in the queue at 2:30 PM MUST be allowed to accredit and vote.\n2. Mandatory PVC Presentation: Every voter must present their original Permanent Voter Card (PVC) at their assigned Polling Unit. No person is permitted to vote without a valid PVC (Section 47(1) of the Electoral Act). Temporary Voter Cards (TVCs), National Identification Numbers (NIN), or digital photos of PVCs are NOT accepted.\n3. Biometric Accreditation via BVAS: The Assistant Presiding Officer (APO I) verifies that the PVC belongs to the voter and uses the Bimodal Voter Accreditation System (BVAS) to authenticate the voter via fingerprint or facial recognition.\n4. Register & Indelible Ink: Upon successful BVAS authentication, the voter's name is ticked in the Register of Voters, indelible ink is applied to the cuticle of the appropriate finger, and the Presiding Officer issues a stamped, signed ballot paper.\n5. Secret Ballot & Casting: The voter proceeds to the voting cubicle, marks the ballot paper secretly, folds it vertically, and deposits it into the ballot box in full view of everyone present.\n6. Sorting, Counting & IReV Upload: Immediately after voting concludes, ballots are sorted and counted openly at the Polling Unit. Scores are entered onto Form EC8A, signed by the Presiding Officer and party/observer agents, snapped with the BVAS camera, and uploaded to the INEC Result Viewing Portal (IReV) before moving to the Registration Area (Ward) Collation Centre.",
+    "key_facts": [
+      "Polls open at 8:30 AM WAT and close at 2:30 PM WAT (voters on queue by 2:30 PM must be allowed to vote).",
+      "Original physical Permanent Voter Card (PVC) is strictly mandatory.",
+      "Biometric verification uses BVAS (fingerprint or facial recognition).",
+      "No SMS, online, or NIN-only voting is permitted under Nigerian electoral law.",
+      "Polling unit results are recorded on Form EC8A and uploaded via BVAS to the IReV portal."
+    ]
+  },
+  {
+    "doc_id": "INEC-2026-PRESS-04",
+    "title": "INEC Official Press Release: Final Readiness Assessment, Election Timetable & PVC Collection Deadline",
+    "source_id": "SRC-INEC",
+    "source_name": "Independent National Electoral Commission (INEC)",
+    "source_tier": "TIER_1_OFFICIAL",
+    "url": "https://www.inecnigeria.org/news/final-readiness-assessment-and-pvc-collection-deadline-nov-2026/",
+    "published_date": "2026-11-08",
+    "category": "official_announcement",
+    "topics": ["latest announcement", "election date", "PVC collection", "deadline", "mock accreditation", "readiness", "schedule"],
+    "summary": "Latest official commission communiqué confirming the November 21, 2026 election date, final PVC collection window, and BVAS mock accreditation results.",
+    "content": "COMMUNIQUÉ FROM THE COMMISSION (8 NOVEMBER 2026):\n1. Election Date Unchanged: The Commission wishes to reassure all citizens that the General Election remains firmly scheduled for Saturday, November 21, 2026, from 8:30 AM to 2:30 PM WAT. There are no plans whatsoever to postpone or reschedule the election.\n2. Final PVC Collection Window: Registered voters who have not yet picked up their Permanent Voter Cards (PVCs) must do so in person at their respective Local Government Area (LGA) INEC offices on or before Sunday, November 15, 2026 at 5:00 PM WAT. Collection by proxy is strictly prohibited.\n3. Nationwide BVAS Mock Accreditation Results: Following the nationwide mock accreditation exercise conducted across 436 designated Polling Units in all 36 States and the FCT on November 7, 2026, the Commission recorded a 98.4% first-attempt biometric verification rate (fingerprint + facial capture).\n4. Non-Sensitive Materials Deployed: All non-sensitive election materials have been deployed to the 774 Local Government Area offices nationwide, while sensitive materials remain secured with the Central Bank of Nigeria (CBN) for scheduled distribution 48 hours before Election Day.",
+    "key_facts": [
+      "Official Election Date: Saturday, November 21, 2026 (8:30 AM – 2:30 PM WAT).",
+      "Final PVC Collection Deadline: Sunday, November 15, 2026 at 5:00 PM WAT at LGA INEC offices (no proxy collection).",
+      "BVAS Mock Accreditation achieved a 98.4% biometric authentication success rate across 436 test polling units.",
+      "Sensitive materials are secured and scheduled for distribution 48 hours prior to polls opening."
+    ]
+  },
+  {
+    "doc_id": "INEC-2026-FACT-02",
+    "title": "INEC Disinformation Alert: Rebuttal of Purported 3-Week Election Postponement and Fake SMS/NIN Voting Portal",
+    "source_id": "SRC-INEC",
+    "source_name": "Independent National Electoral Commission (INEC)",
+    "source_tier": "TIER_1_OFFICIAL",
+    "url": "https://www.inecnigeria.org/news/disinformation-alert-false-postponement-and-sms-voting-claims/",
+    "published_date": "2026-11-09",
+    "category": "fact_check",
+    "topics": ["election date", "postponement", "rumor", "SMS voting", "NIN voting", "fake portal", "claim verification"],
+    "summary": "Official rebuttal refuting viral claims of a 3-week election postponement to December 12 and warning citizens against fraudulent SMS/NIN voting links.",
+    "content": "DISINFORMATION ALERT (9 NOVEMBER 2026):\nThe attention of the Independent National Electoral Commission (INEC) has been drawn to a doctored graphic and viral voice note circulating on WhatsApp and social media claiming that the November 21, 2026 election has been postponed by three weeks to December 12, 2026.\n\n1. FALSE POSTPONEMENT CLAIM: This claim is completely fabricated and malicious. The election date of Saturday, November 21, 2026 has NOT changed.\n2. FALSE SMS / NIN VOTING CLAIM: The Commission also refutes viral messages claiming that voters who lost their PVCs can vote from home via an SMS shortcode or by entering their National Identification Number (NIN) on an external web link. Nigeria does NOT use electronic or SMS voting. Any website requesting your NIN or Bank Verification Number (BVN) to 'register for online voting' is a phishing scam.",
+    "key_facts": [
+      "Viral claims that the November 21, 2026 election was postponed to December 12, 2026 are FALSE.",
+      "Claims that voters can vote via SMS or using their NIN without a physical PVC are FALSE and fraudulent.",
+      "Only official announcements published on inecnigeria.org and verified INEC channels are authentic."
+    ]
+  },
+  {
+    "doc_id": "ELECTORAL-ACT-2022-S47",
+    "title": "Electoral Act Statutory Provisions: Sections 28, 47, 50 & 60 (Accreditation, Technological Devices & Result Transmission)",
+    "source_id": "SRC-NASS-LAW",
+    "source_name": "Official Gazette of the Federal Republic of Nigeria (Electoral Act)",
+    "source_tier": "TIER_1_OFFICIAL",
+    "url": "https://placng.org/i/wp-content/uploads/2022/02/Electoral-Act-2022.pdf",
+    "published_date": "2022-02-25",
+    "category": "legal_framework",
+    "topics": ["electoral act", "law", "section 47", "section 60", "over-voting", "BVAS", "collation", "voting procedure"],
+    "summary": "Statutory requirements governing mandatory PVC use, technological accreditation via BVAS, cancellation for over-voting, and result recording.",
+    "content": "KEY STATUTORY PROVISIONS OF THE ELECTORAL ACT:\n- Section 47(1): A person intending to vote shall present himself with his voter's card to a Presiding Officer for accreditation at the polling unit in the constituency in which his name is registered.\n- Section 47(2): To vote, the Presiding Officer shall use a smart card reader or any other technological device that may be prescribed by the Commission (BVAS), for the accreditation of voters, to verify, confirm or authenticate the particulars of the intending voter.\n- Section 47(3): Where a deployed technological device fails to function and is not replaced for that polling unit, the election in that unit shall be cancelled and rescheduled within 24 hours.\n- Section 51(2): Where the number of votes cast at an election in any polling unit exceeds the number of accredited voters in that polling unit (over-voting), the Presiding Officer shall cancel the result of the election in that polling unit.\n- Section 60(5): The Presiding Officer shall transfer the results including total number of accredited voters and the results of the ballot in a manner as the Commission may prescribe.",
+    "key_facts": [
+      "Section 47(1)-(2) mandates physical PVC presentation and technological biometric verification (BVAS).",
+      "Section 47(3) mandates rescheduling within 24 hours if a failed BVAS device cannot be replaced.",
+      "Section 51(2) defines over-voting strictly against the number of accredited voters on BVAS, not total registered voters."
+    ]
+  },
+  {
+    "doc_id": "INEC-2026-TECH-03",
+    "title": "INEC Technical Bulletin: BVAS Offline Accreditation & IReV Result Upload Architecture",
+    "source_id": "SRC-INEC",
+    "source_name": "Independent National Electoral Commission (INEC)",
+    "source_tier": "TIER_1_OFFICIAL",
+    "url": "https://www.inecnigeria.org/resources/bvas-and-irev-technical-architecture-2026/",
+    "published_date": "2026-11-05",
+    "category": "multi_source_development",
+    "topics": ["BVAS", "IReV", "network", "offline", "result transmission", "electronic transmission", "logistics", "development"],
+    "summary": "INEC's official technical explanation of how BVAS operates offline during accreditation and queues encrypted EC8A result images when cellular coverage is weak.",
+    "content": "TECHNICAL BULLETIN ON BVAS & IReV:\n1. Offline Biometric Accreditation: The BVAS device does NOT require internet or mobile network connectivity to verify voters on Election Day. All biometric templates for the specific Polling Unit (typically 500–750 voters) are pre-loaded onto the secure encrypted enclave of the assigned BVAS device.\n2. Result Sheet Capture & Upload: After counting ballots and completing Form EC8A, the Presiding Officer captures a high-resolution image of Form EC8A using the BVAS camera and transmits it to the INEC Result Viewing Portal (IReV).\n3. Store-and-Forward in Low-Connectivity Areas: If a Polling Unit has zero mobile data coverage at 3:00 PM, the signed Form EC8A image is cryptographically timestamped and stored in the BVAS offline queue, then automatically transmitted to IReV as soon as the Presiding Officer reaches network coverage at the Ward Collation Centre.",
+    "key_facts": [
+      "BVAS voter accreditation runs 100% offline using pre-loaded polling unit biometric data.",
+      "Internet connectivity is only needed when uploading the snapped Form EC8A result sheet to IReV after counting.",
+      "In zero-network polling units, BVAS cryptographically timestamps and queues the EC8A image for upload at the Ward Collation Centre."
+    ]
+  },
+  {
+    "doc_id": "YIAGA-2026-OBS-01",
+    "title": "YIAGA Africa Pre-Election Observation Assessment: BVAS Readiness, IReV Stress Testing & Last-Mile Logistics",
+    "source_id": "SRC-YIAGA",
+    "source_name": "YIAGA Africa (Watching The Vote)",
+    "source_tier": "TIER_2_ACCREDITED_OBSERVER",
+    "url": "https://yiaga.org/publications/pre-election-observation-report-november-2026/",
+    "published_date": "2026-11-08",
+    "category": "multi_source_development",
+    "topics": ["BVAS", "IReV", "logistics", "observers", "development", "readiness", "mock accreditation", "comparison"],
+    "summary": "Independent observer report corroborating 98%+ BVAS biometric accuracy while highlighting cellular dead-zones in 8.2% of riverine/rural polling units and early transport deployment risks.",
+    "content": "WATCHING THE VOTE (WTV) PRE-ELECTION BRIEF:\n1. Biometric Performance Corroborated: YIAGA Africa deployed 436 stationary observers during the November 7 mock accreditation exercise. Our independent tally confirms INEC's report of strong BVAS biometric performance, with 97.9% of observed voters accredited within 90 seconds.\n2. IReV Upload Latency & Network Dead-Zones: While urban Polling Units in Lagos Mainland, Ikeja, and Abuja uploaded mock EC8A sheets to IReV within 4 minutes, observers identified mobile network dead-zones in 8.2% of sampled riverine and rural Polling Units (notably in Badagry creeks, Epe riverine wards, Bayelsa, and parts of Borno).\n3. Recommendations for Transparency: YIAGA Africa urges INEC to publish a public list of 'Zero-Network Polling Units' before Election Day so citizens understand when a delayed IReV upload is due to store-and-forward queuing rather than interference, and stresses that transport boats and trucks must depart Registration Area Centres (RACs) by 6:00 AM.",
+    "key_facts": [
+      "Independent observers corroborated a 97.9% fast biometric authentication rate during mock accreditation.",
+      "Identified mobile network dead-zones in 8.2% of sampled riverine/rural polling units (including Badagry creeks and Epe riverine areas).",
+      "Recommended that INEC pre-publish known zero-network polling units and enforce 6:00 AM logistics departure from RACs."
+    ]
+  },
+  {
+    "doc_id": "DUBAWA-2026-CHECK-07",
+    "title": "DUBAWA Fact-Check Brief: Understanding IReV Portal vs. Physical Collation and Debunking 'Hacked Server' Rumors",
+    "source_id": "SRC-DUBAWA",
+    "source_name": "DUBAWA & Nigerian Fact-Checkers Coalition (NFC)",
+    "source_tier": "TIER_2_ACCREDITED_OBSERVER",
+    "url": "https://dubawa.org/fact-check-brief-irev-portal-vs-physical-collation-2026/",
+    "published_date": "2026-11-08",
+    "category": "multi_source_development",
+    "topics": ["IReV", "fact check", "collation", "EC8A", "development", "comparison", "server rumor"],
+    "summary": "Fact-checkers explain how Nigeria's dual-track result verification works (physical EC8A sheets + digital IReV portal) and debunk viral claims that IReV automatically tabulates winners.",
+    "content": "NIGERIAN FACT-CHECKERS COALITION ANALYSIS:\nViral posts on X and TikTok have claimed that 'foreign hackers have already pre-loaded winning percentages into the IReV server.' Our forensic review with electoral technology experts establishes the following:\n1. IReV is a Public Transparency Repository, Not an Electronic Voting Machine: Voters cast paper ballots, which are counted by hand at the Polling Unit. IReV stores scanned PDF/JPEG images of signed Form EC8A sheets so citizens, parties, and observers can independently audit the physical numbers.\n2. Dual-Track Verification: Under Section 60 and INEC Guidelines, duplicate copies of signed Form EC8A are handed directly to polling agents, the Nigeria Police, and observers at the Polling Unit before anyone leaves. Any discrepancy between a physical EC8A duplicate and the IReV upload is immediately detectable by party agents and accredited observers.",
+    "key_facts": [
+      "IReV does not cast or electronically tabulate votes; it publishes scanned images of hand-counted Form EC8A polling unit result sheets.",
+      "Party agents and observers receive signed physical carbon copies of Form EC8A at the polling unit, creating an auditable paper-and-digital trail."
+    ]
+  },
+  {
+    "doc_id": "CHANNELS-2026-NEWS-11",
+    "title": "Channels TV Electoral Desk: INEC and Transport Unions Sign MoU for 6:30 AM Election Day Deployment",
+    "source_id": "SRC-CHANNELS",
+    "source_name": "Channels Television Election Desk",
+    "source_tier": "TIER_3_VERIFIED_MEDIA",
+    "url": "https://www.channelstv.com/2026/11/08/inec-transport-unions-sign-mou-for-early-election-day-deployment/",
+    "published_date": "2026-11-08",
+    "category": "multi_source_development",
+    "topics": ["logistics", "transport", "deployment", "polling unit", "opening hours", "development", "comparison"],
+    "summary": "News report on the logistics agreement between INEC, road transport unions, and marine boat operators to prevent late polling unit openings.",
+    "content": "LAGOS / ABUJA — Ahead of the November 21 poll, the Independent National Electoral Commission has signed a revised Memorandum of Understanding (MoU) with road transport unions and marine boat operators to guarantee that ad-hoc staff and materials move from Registration Area Centres (RACs) to Polling Units between 6:30 AM and 7:30 AM.\n\nWhile INEC National Commissioners expressed confidence that 100% of Polling Units will open on time at 8:30 AM, civil society groups interviewed by Channels Television noted that previous delays were caused by late payment of driver stipends and fuel distribution bottlenecks, urging real-time tracking of RAC departures on Friday night.",
+    "key_facts": [
+      "INEC signed an MoU with road and marine transport operators targeting 6:30 AM – 7:30 AM departure from RACs.",
+      "Civil society analysts interviewed by Channels TV cautioned that timely driver stipend disbursement on Friday night remains critical to achieving 8:30 AM poll openings."
+    ]
+  },
+  {
+    "doc_id": "YIAGA-2026-INC-09",
+    "title": "Civic Situation Room Field Log: Investigating Unverified Claims of Polling Unit Relocations in Eti-Osa and Alimosho",
+    "source_id": "SRC-CLEEN",
+    "source_name": "Nigeria Civil Society Situation Room",
+    "source_tier": "TIER_2_ACCREDITED_OBSERVER",
+    "url": "https://situationroomng.org/field-logs/2026-11-09-lagos-polling-unit-relocation-verification/",
+    "published_date": "2026-11-09",
+    "category": "unverified_investigation",
+    "topics": ["polling unit relocation", "Eti-Osa", "Alimosho", "insufficient evidence", "unverified claim", "Lagos", "disqualification"],
+    "summary": "Situation Room log showing that viral claims of secret overnight relocation of 42 polling units in Eti-Osa and Alimosho lack sufficient evidence, with field verification still ongoing.",
+    "content": "FIELD VERIFICATION LOG — STATUS: INCONCLUSIVE / INSUFFICIENT EVIDENCE (9 NOVEMBER 2026):\n1. Claim Under Investigation: Viral social media posts allege that 42 Polling Units in Eti-Osa and Alimosho Local Government Areas of Lagos State were 'secretly relocated overnight to private residential compounds.'\n2. Current Evidence Assessment:\n   - INEC's official Polling Unit Directory shows NO changes to the geo-coordinates or addresses of Polling Units in Eti-Osa or Alimosho since the statutory deadline closed 90 days ago.\n   - Situation Room field observers visited 18 of the 42 cited locations this morning. In 15 locations, the Polling Units remain at their designated public primary schools and open square addresses. In 3 congested street locations in Lekki Phase 1 and Ikotun, local Resident Electoral Officers requested permission to place canopies 30 meters down the same public street due to road drainage construction, NOT in private compounds.\n   - The remaining 24 locations have not yet been physically inspected, and no official INEC Lagos REC bulletin has been issued on the drainage-affected street canopies.\n3. Epistemic Conclusion: There is INSUFFICIENT EVIDENCE to support the claim of unauthorized relocation, and partial field evidence contradicts the 'private compound' allegation. Verification is ongoing.\n4. Note on Rumored Candidate Disqualifications: Similarly, viral rumors claiming a midnight Court of Appeal disqualification of gubernatorial or presidential candidates on November 9 have zero supporting court records on the official Nigerian Judiciary cause list.",
+    "key_facts": [
+      "Status: INSUFFICIENT EVIDENCE / UNVERIFIED regarding alleged relocation of 42 polling units in Eti-Osa and Alimosho.",
+      "INEC's official Polling Unit Directory shows zero authorized address changes.",
+      "Field observers inspected 18 of 42 sites: 15 are unchanged at public schools; 3 shifted 30m along public streets due to drainage works; 24 sites await inspection.",
+      "Rumors of emergency midnight candidate disqualifications have zero supporting official court records."
+    ]
+  }
+]

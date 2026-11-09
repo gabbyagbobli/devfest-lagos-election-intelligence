@@ -1,0 +1,91 @@
+{
+  "registry_version": "2026.11.1",
+  "last_updated": "2026-11-09T08:00:00Z",
+  "description": "Three-Tier Electoral Source Trust Registry used by the Election Intelligence Agent to separate source authority from raw retrieval.",
+  "tiers": {
+    "TIER_1_OFFICIAL": {
+      "label": "Tier 1 — Statutory & Electoral Authority",
+      "trust_score": 0.98,
+      "verification_rule": "Primary authoritative record for electoral dates, legal procedures, voter eligibility, and official announcements.",
+      "sources": [
+        {
+          "source_id": "SRC-INEC",
+          "name": "Independent National Electoral Commission (INEC)",
+          "domains": ["inecnigeria.org", "inecelectionresults.ng", "cvr.inecnigeria.org"],
+          "type": "Constitutional Electoral Body",
+          "country": "Nigeria"
+        },
+        {
+          "source_id": "SRC-NASS-LAW",
+          "name": "Official Gazette of the Federal Republic of Nigeria (Electoral Act)",
+          "domains": ["nass.gov.ng", "placng.org"],
+          "type": "Statutory Legislation",
+          "country": "Nigeria"
+        }
+      ]
+    },
+    "TIER_2_ACCREDITED_OBSERVER": {
+      "label": "Tier 2 — Accredited Election Observers & Fact-Checking Coalitions",
+      "trust_score": 0.90,
+      "verification_rule": "High credibility for field observation, parallel vote tabulation (PVT) methodology, logistics monitoring, and forensic fact-checking. Must be cross-referenced with Tier 1 for statutory rules.",
+      "sources": [
+        {
+          "source_id": "SRC-YIAGA",
+          "name": "YIAGA Africa (Watching The Vote)",
+          "domains": ["yiaga.org", "watchingthevote.org"],
+          "type": "Accredited Domestic Election Observer",
+          "country": "Nigeria"
+        },
+        {
+          "source_id": "SRC-DUBAWA",
+          "name": "DUBAWA & Nigerian Fact-Checkers Coalition (NFC)",
+          "domains": ["dubawa.org", "factcheckhub.com", "africacheck.org"],
+          "type": "IFCN-Signatory Fact-Checking Organization",
+          "country": "Nigeria / West Africa"
+        },
+        {
+          "source_id": "SRC-CLEEN",
+          "name": "Nigeria Civil Society Situation Room",
+          "domains": ["situationroomng.org", "cleen.org"],
+          "type": "Accredited Civic Observation Coalition",
+          "country": "Nigeria"
+        }
+      ]
+    },
+    "TIER_3_VERIFIED_MEDIA": {
+      "label": "Tier 3 — Accredited Public-Interest News Organizations",
+      "trust_score": 0.78,
+      "verification_rule": "Credible journalistic reporting with editorial standards. Claims regarding electoral law or schedule changes require corroboration from Tier 1 or Tier 2 sources.",
+      "sources": [
+        {
+          "source_id": "SRC-CHANNELS",
+          "name": "Channels Television Election Desk",
+          "domains": ["channelstv.com"],
+          "type": "National Broadcast Media",
+          "country": "Nigeria"
+        },
+        {
+          "source_id": "SRC-PREMIUMTIMES",
+          "name": "Premium Times Nigeria Electoral Desk",
+          "domains": ["premiumtimesng.com"],
+          "type": "Investigative Digital Newspaper",
+          "country": "Nigeria"
+        }
+      ]
+    }
+  },
+  "untrusted_patterns": [
+    {
+      "pattern": "whatsapp-forward",
+      "reason": "Unattributed chain messages and viral audio notes lack verifiable provenance."
+    },
+    {
+      "pattern": "breaking-naija-gossip",
+      "reason": "Known clickbait domain publishing fabricated tribunal rulings and fake postponement notices."
+    },
+    {
+      "pattern": "anonymous-telegram-leaks",
+      "reason": "Unverified anonymous channel with zero editorial accountability."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Python & Virtual Environments
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment Secrets & Credentials
+.env
+.env.local
+*.pem
+*.key
+service-account*.json
+
+# ADK Local Session Databases
+.adk/
+*.db
+*.sqlite3
+
+# Firebase & Deployment Caches
+.firebase/
+firebase-debug.log
+.gcloudignore
+dist_hosting/
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

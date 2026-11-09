@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevFest Lagos 2026 — Trustworthy Election Intelligence ADK Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">ADK</div>
+      <div>
+        <div class="brand-title">DevFest Lagos 2026 • Election Intelligence Agent</div>
+        <div class="brand-subtitle">Powered by Google Agent Development Kit (ADK 2) &amp; Antigravity Harness</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="/" class="nav-link active">🛡️ Live Agent Dashboard</a>
+      <a href="/codelab/" class="nav-link">📘 40-Min Codelab</a>
+      <a href="/slides/" class="nav-link">🎤 10-Min Intro Slides</a>
+      <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener" class="nav-link">💻 GitHub Repo</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Multi-Agent Architecture Status Bar -->
+    <section class="hero-banner">
+      <div class="hero-text">
+        <h1>Trustworthy Multi-Agent Election Intelligence Console</h1>
+        <p>
+          Retrieval ≠ Verification. Every query is routed by the <strong>Election Intelligence Coordinator</strong> to specialized ADK sub-agents, grounded in allowlisted Tier 1–3 sources, and audited for epistemic uncertainty.
+        </p>
+      </div>
+      <div class="agent-pills" id="agent-pills">
+        <div class="agent-pill active-agent" id="pill-coordinator">
+          <span class="dot"></span> election_intelligence_coordinator
+        </div>
+        <div class="agent-pill" id="pill-election_research_agent">
+          <span class="dot"></span> election_research_agent
+        </div>
+        <div class="agent-pill" id="pill-claim_verification_agent">
+          <span class="dot"></span> claim_verification_agent
+        </div>
+        <div class="agent-pill" id="pill-election_information_analyst">
+          <span class="dot"></span> election_information_analyst
+        </div>
+      </div>
+    </section>
+
+    <div class="dashboard-grid">
+      <!-- Left Column: Query Input, Sample Scenarios & Source Checker -->
+      <aside>
+        <!-- Query & Claim Input Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🔍 Ask Question or Verify Claim</div>
+            <span class="card-badge" id="mode-indicator">Mode: auto</span>
+          </div>
+
+          <div class="mode-tabs" id="mode-tabs">
+            <button type="button" class="mode-tab active" data-mode="auto">Auto Coordinator</button>
+            <button type="button" class="mode-tab" data-mode="verify">Verify Claim</button>
+            <button type="button" class="mode-tab" data-mode="research">Official Rules</button>
+            <button type="button" class="mode-tab" data-mode="summarize">Announcements</button>
+            <button type="button" class="mode-tab" data-mode="compare">Compare Sources</button>
+          </div>
+
+          <form id="query-form">
+            <textarea
+              id="query-input"
+              class="query-textarea"
+              placeholder="Ask an election question or paste a viral claim to verify (e.g., 'What are the official voting procedures?' or 'Has INEC postponed the election by 3 weeks?')"
+            >What are the official voting procedures for this election?</textarea>
+            <button type="submit" id="submit-btn" class="btn-primary">
+              Run Multi-Agent Election Intelligence →
+            </button>
+          </form>
+        </div>
+
+        <!-- Preset Workshop Verification Scenarios -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">⚡ Live Workshop Demo Scenarios</div>
+            <span class="card-badge">6 Presets</span>
+          </div>
+          <div class="samples-list" id="samples-list">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Electoral Source Trust Registry Inspector -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🏛️ Source Credibility Allowlist Tool</div>
+            <span class="card-badge">Tier 1–3 Registry</span>
+          </div>
+          <div class="source-check-row">
+            <input
+              type="text"
+              id="source-input"
+              class="source-input"
+              placeholder="e.g. inecnigeria.org or whatsapp-forward"
+              value="inecnigeria.org"
+            />
+            <button type="button" id="source-check-btn" class="btn-secondary">Inspect</button>
+          </div>
+          <div class="quick-domains">
+            <span class="chip" data-domain="inecnigeria.org">inecnigeria.org</span>
+            <span class="chip" data-domain="yiaga.org">yiaga.org</span>
+            <span class="chip" data-domain="dubawa.org">dubawa.org</span>
+            <span class="chip" data-domain="channelstv.com">channelstv.com</span>
+            <span class="chip" data-domain="whatsapp-forward">whatsapp-forward</span>
+          </div>
+          <div id="source-check-result" class="trace-item" style="display: block;">
+            Click <strong>Inspect</strong> or a domain chip to run <code>check_source_credibility()</code>.
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Column: Epistemic Status, Agent Trace, Synthesized Response & Evidence Panel -->
+      <section>
+        <!-- Epistemic Verdict & Uncertainty Banner -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">⚖️ Epistemic Verification &amp; Uncertainty Indicator</div>
+            <span class="card-badge" id="engine-badge">Google ADK 2</span>
+          </div>
+
+          <div id="status-banner" class="status-banner status-SUPPORTED">
+            <div class="status-top">
+              <span class="verdict-pill" id="verdict-pill">VERDICT: SUPPORTED</span>
+              <span class="confidence-label" id="confidence-label">Confidence: HIGH (Tier 1 Statutory &amp; Official Sources)</span>
+            </div>
+            <div class="uncertainty-msg" id="uncertainty-msg">
+              All statements in this response are directly grounded in allowlisted Tier 1–3 electoral records.
+            </div>
+          </div>
+
+          <!-- Synthesized Grounded Response -->
+          <div class="response-body" id="response-markdown">
+            Loading grounded election intelligence briefing...
+          </div>
+        </div>
+
+        <!-- Multi-Agent Orchestration & Tool Execution Trace -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🔄 ADK Multi-Agent Delegation &amp; Tool Execution Trace</div>
+            <span class="card-badge" id="delegated-agent-badge">Delegated: election_research_agent</span>
+          </div>
+          <div class="trace-timeline" id="trace-timeline">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Grounded Evidence & Source Attribution Cards -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📚 Retrieved Evidence &amp; Source Attribution Panel</div>
+            <span class="card-badge" id="evidence-count-badge">0 Sources Cited</span>
+          </div>
+          <div class="evidence-grid" id="evidence-grid">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/static/app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

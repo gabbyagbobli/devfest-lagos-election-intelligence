@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "target": "lagos-election-agent",
+    "public": "dist_hosting",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true
+  }
+}
