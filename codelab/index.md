@@ -108,51 +108,43 @@ In this step, you will clone the starter repository, create an isolated Python v
 * *(Optional)* A **Google Gemini API Key** (`GOOGLE_API_KEY`) or **Google Cloud Vertex AI Project** (`GOOGLE_CLOUD_PROJECT`).
   * *Note:* The project includes a **Zero-Downtime Grounded Tool Engine** fallback so you can complete every step of the workshop even if conference Wi-Fi drops or you don't have an API key handy!
 
-### 1. Clone the Workshop Repository
-Run the following commands in your terminal:
+### 1. Activate Cloud Shell & Select Your Workshop Project
+Open [Google Cloud Shell](https://shell.cloud.google.com/?show=ide,terminal) and run:
 
 ```bash
-git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
-cd devfest-lagos-election-intelligence
+unset CLOUDSDK_CORE_PROJECT
+PS3="Select your workshop project number (e.g. 1): "
+select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
+  [ -n "$PROJECT_ID" ] && gcloud config set project "$PROJECT_ID" && break
+done
+
+gcloud services enable aiplatform.googleapis.com
 ```
 
-### 2. Create and Activate a Virtual Environment
-**On macOS / Linux / Cloud Shell:**
+### 2. Clone the Workshop Repository & Install Dependencies
 ```bash
+cd ~
+git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
+cd ~/devfest-lagos-election-intelligence
+
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-**On Windows (PowerShell):**
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment Variables (`.env`)
-Copy `.env.example` to `.env`:
+### 3. Auto-Configure `.env` for Cloud Shell & Vertex AI
+Run this single command in Cloud Shell to automatically configure `.env` using your active Google Cloud project and workshop credits:
 
 ```bash
-cp .env.example .env
-```
-
-Open `.env` in your editor and configure either your Gemini API key or Google Cloud project:
-
-```ini
-# Option A: Google AI Studio API Key
-GOOGLE_API_KEY=your_gemini_api_key_here
-
-# Option B: Google Cloud Vertex AI / Agent Platform
-# GOOGLE_GENAI_USE_VERTEXAI=1
-# GOOGLE_CLOUD_PROJECT=your-gcp-project-id
-# GOOGLE_CLOUD_LOCATION=us-central1
-
-# Model selection for ADK agents
+cat <<EOF > .env
+GOOGLE_GENAI_USE_VERTEXAI=1
+GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
+GOOGLE_CLOUD_LOCATION=us-central1
 ADK_MODEL=gemini-2.5-flash
+EOF
+
+cat .env
 ```
 
 > aside positive

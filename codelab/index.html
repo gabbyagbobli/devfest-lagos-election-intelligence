@@ -562,56 +562,55 @@
         </section>
 
         <!-- ============================================================== -->
-        <!-- STEP 3: ENVIRONMENT SETUP                                      -->
+        <!-- STEP 3: ENVIRONMENT SETUP (GOOGLE CLOUD SHELL PRIMARY)         -->
         <!-- ============================================================== -->
-        <section class="codelab-step" data-title="Environment Setup" data-duration="5">
+        <section class="codelab-step" data-title="Cloud Shell & Environment Setup" data-duration="5">
           <div class="step-header">
-            <h1>3. Set Up the Development Environment</h1>
+            <h1>3. Set Up Google Cloud Shell &amp; Your Environment</h1>
             <span class="step-time-badge">Duration: 5:00</span>
           </div>
 
-          <p>In this step, you will clone the workshop repository, create an isolated Python virtual environment, install <strong>Google ADK (<code>google-adk</code>)</strong> and <strong>FastAPI</strong>, and inspect the project layout.</p>
+          <p>Because you have <strong>Google Cloud workshop credits</strong>, you can run every single command in this codelab directly inside <strong>Google Cloud Shell</strong>—no local installations or manual API keys required!</p>
 
-          <h2>Prerequisites</h2>
-          <ul>
-            <li><strong>Python 3.11+</strong> installed (or Google Cloud Shell)</li>
-            <li><strong>Git</strong> installed</li>
-            <li><strong>Code Editor:</strong> Antigravity IDE, VS Code, or Cloud Shell Editor</li>
-            <li><em>(Optional)</em> A <strong>Gemini API Key</strong> (from Google AI Studio) or a <strong>Google Cloud Project</strong> with Vertex AI enabled. <em>Note: The repository also includes a built-in deterministic Grounded Tool Engine fallback so you can complete every step even without a cloud key or on unstable conference Wi-Fi!</em></li>
-          </ul>
+          <div class="aside-positive">
+            <strong>💡 Incognito Tip for Workshop Credits:</strong><br/>
+            Open the workshop credit redemption link and <a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">Google Cloud Shell</a> in an <strong>Incognito window</strong> signed in with your personal <code>@gmail.com</code> account so your personal and corporate accounts do not mix.
+          </div>
 
-          <h2>Step 3.1 — Clone the Repository</h2>
-          <p>Open your terminal and run:</p>
-          <pre><code>git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
-cd devfest-lagos-election-intelligence</code></pre>
+          <h2>Step 3.1 — Activate Cloud Shell &amp; Select Your Project</h2>
+          <p>Open <a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">Google Cloud Shell</a> (or click the <strong>Activate Cloud Shell</strong> <code>&gt;_</code> icon in the top-right of the Google Cloud Console). Then run the following snippet to select your active workshop project and enable the Vertex AI / Agent Platform API:</p>
+          <pre><code>unset CLOUDSDK_CORE_PROJECT
+PS3="Select your workshop project number (e.g. 1): "
+select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
+  [ -n "$PROJECT_ID" ] &amp;&amp; gcloud config set project "$PROJECT_ID" &amp;&amp; break
+done
 
-          <h2>Step 3.2 — Create Virtual Environment &amp; Install Dependencies</h2>
-          <p><strong>On macOS / Linux / Google Cloud Shell:</strong></p>
-          <pre><code>python3 -m venv .venv
+gcloud services enable aiplatform.googleapis.com</code></pre>
+
+          <h2>Step 3.2 — Clone the Workshop Repository &amp; Install Dependencies</h2>
+          <p>In your Cloud Shell terminal, clone the starter repository, create a Python virtual environment, and install the dependencies:</p>
+          <pre><code>cd ~
+git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
+cd ~/devfest-lagos-election-intelligence
+
+python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt</code></pre>
 
-          <p><strong>On Windows (PowerShell):</strong></p>
-          <pre><code>python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install --upgrade pip
-pip install -r requirements.txt</code></pre>
-
-          <h2>Step 3.3 — Configure Environment Variables (<code>.env</code>)</h2>
-          <p>Copy the template environment file:</p>
-          <pre><code>cp .env.example .env</code></pre>
-          <p>Open <code>.env</code> in your editor and configure either Option A (Gemini API Key) or Option B (Google Cloud Vertex AI):</p>
-          <pre><code># Option A: Google AI Studio / Gemini Developer API Key
-GOOGLE_API_KEY=your_gemini_api_key_here
-
-# Option B: Google Cloud Vertex AI / Agent Platform
-GOOGLE_GENAI_USE_VERTEXAI=0
-GOOGLE_CLOUD_PROJECT=your-gcp-project-id
+          <h2>Step 3.3 — Auto-Configure <code>.env</code> for Cloud Shell &amp; Vertex AI</h2>
+          <p>Run this single command in Cloud Shell to automatically generate your <code>.env</code> file using your active Google Cloud project and workshop credits (no manual API key copying needed!):</p>
+          <pre><code>cat &lt;&lt;EOF &gt; .env
+GOOGLE_GENAI_USE_VERTEXAI=1
+GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
 GOOGLE_CLOUD_LOCATION=us-central1
+ADK_MODEL=gemini-2.5-flash
+EOF
 
-# Model used by all 4 ADK agents
-ADK_MODEL=gemini-2.5-flash</code></pre>
+cat .env</code></pre>
+
+          <p>To open the repository in the Cloud Shell Code Editor alongside your terminal, you can also run:</p>
+          <pre><code>cloudshell edit app/agents/coordinator.py</code></pre>
 
           <h2>Project Directory Structure</h2>
           <pre><code>devfest-lagos-election-intelligence/
@@ -634,18 +633,19 @@ ADK_MODEL=gemini-2.5-flash</code></pre>
     └── test_election_agent.py      # Automated Pytest Suite (8 Verification Tests)</code></pre>
 
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Confirm Installation &amp; Data Corpus:</strong><br/>
-            Run these two commands in your terminal:
+            <strong>🔍 Checkpoint — Confirm Cloud Shell Setup &amp; Data Corpus:</strong><br/>
+            Run these two commands in your Cloud Shell terminal:
             <pre><code>adk --version
-python -c "import json; print('Verified corpus docs:', len(json.load(open('data/election_corpus.json', encoding='utf8'))))"</code></pre>
+python3 -c "import json; print('Verified corpus docs:', len(json.load(open('data/election_corpus.json', encoding='utf8'))))"</code></pre>
             <strong>Expected Output:</strong>
             <pre><code>adk, version 2.14.0
 Verified corpus docs: 9</code></pre>
           </div>
 
           <div class="aside-negative">
-            <strong>🛠️ Troubleshooting:</strong><br/>
-            If PowerShell blocks script execution when running <code>.\.venv\Scripts\Activate.ps1</code>, run <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code> first, or invoke Python directly via <code>.\.venv\Scripts\python.exe</code>.
+            <strong>🛠️ Session Recovery Tip:</strong><br/>
+            If your Cloud Shell tab reloads or disconnects during the workshop, reconnect to your environment at any time with:
+            <pre><code>cd ~/devfest-lagos-election-intelligence &amp;&amp; source .venv/bin/activate</code></pre>
           </div>
         </section>
 
@@ -1100,18 +1100,23 @@ tests/test_election_agent.py::test_fastapi_endpoints_and_demo_questions PASSED [
 
 ======================== 8 passed in 2.60s =========================</code></pre>
 
-          <h2>Step 8.2 — Launch the Election Intelligence Trust Dashboard</h2>
-          <p>Start the FastAPI application server on port <code>8080</code>:</p>
-          <pre><code>uvicorn app.main:app --reload --port 8080</code></pre>
-          <p>Now open <strong><code>http://localhost:8080</code></strong> in your browser (or open the live deployed app at <a href="/" target="_blank" rel="noopener">https://devfest-lagos-election-agent-2026.web.app</a>).</p>
+          <h2>Step 8.2 — Launch the Election Intelligence Trust Dashboard in Cloud Shell</h2>
+          <p>Start the FastAPI application server on port <code>8080</code> (Google Cloud Shell's default Web Preview port):</p>
+          <pre><code>cd ~/devfest-lagos-election-intelligence &amp;&amp; source .venv/bin/activate
+uvicorn app.main:app --host 0.0.0.0 --port 8080</code></pre>
+          <p>To view your running application in Google Cloud Shell:</p>
+          <ol>
+            <li>Click the <strong>Web Preview</strong> icon in the top-right toolbar of Google Cloud Shell.</li>
+            <li>Select <strong>Preview on port 8080</strong> (or click <strong>Change port</strong> &rarr; enter <code>8080</code> &rarr; <strong>Change and Preview</strong>).</li>
+          </ol>
 
-          <h2>Step 8.3 — (Optional) Test with ADK CLI &amp; ADK Web UI</h2>
-          <p>Because our agent package in <code>app/election_intelligence/</code> follows standard ADK conventions, you can also run it directly in ADK's terminal runner or built-in developer playground:</p>
-          <pre><code># Run interactively in the terminal CLI
+          <h2>Step 8.3 — (Optional) Test with ADK CLI &amp; ADK Web UI in Cloud Shell</h2>
+          <p>Press <code>Ctrl + C</code> to stop <code>uvicorn</code> if running, then test our agent package directly in ADK's terminal runner or built-in developer playground (passing <code>--allow_origins "*"</code> for Cloud Shell Web Preview):</p>
+          <pre><code># Option A: Run interactively in the Cloud Shell terminal
 adk run app/election_intelligence
 
-# Or launch the ADK Developer Web UI on port 8000
-adk web app</code></pre>
+# Option B: Launch the ADK Developer Web UI on port 8080 for Cloud Shell Web Preview
+adk web app --port 8080 --allow_origins "*"</code></pre>
 
           <div class="aside-negative">
             <strong>🛠️ Troubleshooting Common Errors:</strong>
