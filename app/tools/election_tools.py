@@ -133,7 +133,9 @@ def search_verified_election_corpus(query: str, category: str = "all") -> dict[s
             "query": query,
             "category": category,
             "match_count": 0,
+            "count": 0,
             "documents": [],
+            "results": [],
             "epistemic_notice": (
                 "No matching records were found in the verified election corpus. "
                 "Do NOT invent facts or citations. State clearly that verified evidence is unavailable."
@@ -145,7 +147,9 @@ def search_verified_election_corpus(query: str, category: str = "all") -> dict[s
         "query": query,
         "category": category,
         "match_count": len(top_docs),
+        "count": len(top_docs),
         "documents": top_docs,
+        "results": top_docs,
         "epistemic_notice": (
             "Cite every fact using its [doc_id] and source_name. "
             "Distinguish Tier 1 statutory rules from Tier 2/3 observer and media reports."
@@ -352,6 +356,7 @@ def verify_election_claim(claim: str) -> dict[str, Any]:
         "claim": claim,
         "verdict": verdict,
         "confidence": confidence,
+        "confidence_score": 0.96 if verdict in ("CONTRADICTED", "SUPPORTED") else 0.35,
         "epistemic_explanation": explanation,
         "retrieval_vs_verification_note": (
             "Retrieval locates relevant documents; Verification evaluates source authority (Tier 1–3), "
