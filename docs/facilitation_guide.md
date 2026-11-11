@@ -19,7 +19,7 @@
 ## Detailed Minute-by-Minute Breakdown
 
 ### Segment 1: Introduction & Slides (Minutes 00:00 – 10:00)
-*Open the interactive slide deck at `/slides/`.*
+*Present your opening slides (see `SLIDE_DECK_CONTENT.md` for talking points and slide content).*
 
 * **00:00 – 01:15 (Slide 1 — The Problem):** Welcome attendees to DevFest Lagos 2026. Frame the stakes: during elections, viral WhatsApp voice notes, fake SMS voting portals, and doctored postponement graphics erode public trust.
 * **01:15 – 02:30 (Slide 2 — Why Ordinary Chatbots Fail):** Explain why standard LLMs hallucinate citations and why naive RAG confuses *mentioning* a rumor with *verifying* it.

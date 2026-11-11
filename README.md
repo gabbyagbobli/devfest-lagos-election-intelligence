@@ -171,12 +171,12 @@ gcloud run deploy devfest-lagos-election-agent \
   --source . \
   --region us-central1 \
   --allow-unauthenticated \
-  --set-env-vars="GOOGLE_GENAI_USE_VERTEXAI=1,GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,ADK_MODEL=gemini-2.5-flash" \
+  --set-env-vars="GOOGLE_GENAI_USE_VERTEXAI=1,GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID,GOOGLE_CLOUD_LOCATION=global,ADK_MODEL=gemini-3.8-flash" \
   --max-instances=3 \
   --memory=512Mi
 ```
 
-### Deploy Frontend, Codelab & Slides to Firebase Hosting
+### Deploy Frontend & Codelab to Firebase Hosting
 ```bash
-firebase deploy --only hosting:devfest-lagos-election-agent-2026 --project devfest-ng-election-2026
+firebase deploy --only hosting --project devfest-ng-election-2026
 ```

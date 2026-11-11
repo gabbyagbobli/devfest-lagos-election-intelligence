@@ -603,8 +603,8 @@ pip install -r requirements.txt</code></pre>
           <pre><code>cat &lt;&lt;EOF &gt; .env
 GOOGLE_GENAI_USE_VERTEXAI=1
 GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
-GOOGLE_CLOUD_LOCATION=us-central1
-ADK_MODEL=gemini-2.5-flash
+GOOGLE_CLOUD_LOCATION=global
+ADK_MODEL=gemini-3.8-flash
 EOF
 
 cat .env</code></pre>
@@ -895,7 +895,7 @@ from app.tools.election_tools import (
     verify_election_claim,
 )
 
-MODEL_NAME = os.getenv("ADK_MODEL", "gemini-2.5-flash")
+MODEL_NAME = os.getenv("ADK_MODEL", "gemini-3.8-flash")
 
 # ---------------------------------------------------------------------------
 # B. Election Research Agent
@@ -1071,7 +1071,7 @@ print('Model:', root_agent.model)
 print('Sub-Agents:', [sa.name for sa in root_agent.sub_agents])"</code></pre>
             <strong>Expected Output:</strong>
             <pre><code>Root Agent: election_intelligence_coordinator
-Model: gemini-2.5-flash
+Model: gemini-3.8-flash
 Sub-Agents: ['election_research_agent', 'claim_verification_agent', 'election_information_analyst']</code></pre>
           </div>
         </section>

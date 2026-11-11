@@ -378,6 +378,13 @@ async def run_election_intelligence_query(
 
     if use_live_adk:
         try:
+            if (
+                os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
+                and "3.8" in str(root_agent.model)
+                and os.getenv("GOOGLE_CLOUD_LOCATION", "").strip() in ("", "us-central1")
+            ):
+                os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
+
             sid = session_id or f"session-{uuid.uuid4().hex[:8]}"
             user_id = "workshop-participant"
             await _session_service.create_session(

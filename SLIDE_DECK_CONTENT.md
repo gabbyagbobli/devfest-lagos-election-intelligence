@@ -63,7 +63,7 @@
 
 ### Bullet Points for Your Slide
 * **Google Agent Development Kit (`google-adk`):**
-  * Code-first Python framework for building, orchestrating, and debugging single and multi-agent systems powered by Gemini (`gemini-2.5-flash`).
+  * Code-first Python framework for building, orchestrating, and debugging single and multi-agent systems powered by Gemini 3.8 Flash (`gemini-3.8-flash`).
   * Native primitives: `Agent`, `FunctionTool`, `sub_agents`, `Runner`, `adk run` CLI, and `adk web` trace inspector.
 * **The Antigravity Harness:**
   * Agentic development environment for rapid multi-file scaffolding, automated `pytest` verification, guardrail testing, and cloud deployment.
@@ -74,7 +74,7 @@ from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
 election_research_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-3.8-flash",
     name="election_research_agent",
     description="Retrieves verified election procedures and checks source credibility.",
     instruction="Cite every fact with [doc_id], source_name, published_date, and url...",

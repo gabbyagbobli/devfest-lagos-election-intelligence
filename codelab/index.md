@@ -140,8 +140,8 @@ Run this single command in Cloud Shell to automatically configure `.env` using y
 cat <<EOF > .env
 GOOGLE_GENAI_USE_VERTEXAI=1
 GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
-GOOGLE_CLOUD_LOCATION=us-central1
-ADK_MODEL=gemini-2.5-flash
+GOOGLE_CLOUD_LOCATION=global
+ADK_MODEL=gemini-3.8-flash
 EOF
 
 cat .env
@@ -297,7 +297,7 @@ from app.tools.election_tools import (
     verify_election_claim,
 )
 
-MODEL_NAME = os.getenv("ADK_MODEL", "gemini-2.5-flash")
+MODEL_NAME = os.getenv("ADK_MODEL", "gemini-3.8-flash")
 
 # B. Election Research Agent
 election_research_agent = Agent(

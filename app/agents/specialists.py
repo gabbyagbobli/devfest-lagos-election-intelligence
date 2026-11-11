@@ -20,7 +20,7 @@ from app.tools.election_tools import (
     verify_election_claim,
 )
 
-MODEL_NAME = os.getenv("ADK_MODEL", "gemini-2.5-flash")
+MODEL_NAME = os.getenv("ADK_MODEL", "gemini-3.8-flash")
 
 # ---------------------------------------------------------------------------
 # B. Election Research Agent
