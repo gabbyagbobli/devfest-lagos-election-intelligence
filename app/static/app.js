@@ -165,6 +165,24 @@
   ];
 
   let currentMode = "auto";
+  const SESSION_KEY_STORAGE = "devfest_ai_studio_api_key";
+
+  function getSavedApiKey() {
+    try {
+      return (sessionStorage.getItem(SESSION_KEY_STORAGE) || "").trim();
+    } catch (_e) {
+      return "";
+    }
+  }
+
+  function refreshApiKeyBadge() {
+    const btn = document.getElementById("open-api-modal-btn");
+    const label = document.getElementById("api-key-btn-label");
+    if (!btn || !label) return;
+    const hasKey = Boolean(getSavedApiKey());
+    btn.classList.toggle("key-active", hasKey);
+    label.textContent = hasKey ? "AI Studio Active" : "AI Studio Key";
+  }
 
   function switchResultView(viewName) {
     document.querySelectorAll(".result-tab").forEach((btn) => {
@@ -545,7 +563,10 @@
     switchResultView("briefing");
 
     try {
-      const data = await callApiWithFallback("/api/query", { query: queryText, mode: mode });
+      const payload = { query: queryText, mode: mode };
+      const userKey = getSavedApiKey();
+      if (userKey) payload.api_key = userKey;
+      const data = await callApiWithFallback("/api/query", payload);
       updateUI(data);
     } catch (_err) {
       const fallbackData = localFallbackExecute(queryText, mode);
@@ -689,6 +710,89 @@
         inspectSource(d);
       });
     });
+
+    // AI Studio API Key Modal
+    const modalBackdrop = document.getElementById("api-modal-backdrop");
+    const openModalBtn = document.getElementById("open-api-modal-btn");
+    const closeModalBtn = document.getElementById("close-api-modal-btn");
+    const saveKeyBtn = document.getElementById("save-api-key-btn");
+    const clearKeyBtn = document.getElementById("clear-api-key-btn");
+    const keyInput = document.getElementById("api-key-input");
+    const keyStatus = document.getElementById("api-key-status");
+
+    function openModal() {
+      if (!modalBackdrop) return;
+      keyInput.value = getSavedApiKey();
+      keyStatus.textContent = getSavedApiKey()
+        ? "Key is currently active in this browser tab."
+        : "";
+      keyStatus.style.color = "var(--text-muted)";
+      modalBackdrop.hidden = false;
+      keyInput.focus();
+    }
+
+    function closeModal() {
+      if (modalBackdrop) modalBackdrop.hidden = true;
+    }
+
+    if (openModalBtn) openModalBtn.addEventListener("click", openModal);
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener("click", (ev) => {
+        if (ev.target === modalBackdrop) closeModal();
+      });
+    }
+
+    if (saveKeyBtn) {
+      saveKeyBtn.addEventListener("click", async () => {
+        const candidate = (keyInput.value || "").trim();
+        if (!candidate) {
+          keyStatus.style.color = "#fbbf24";
+          keyStatus.textContent = "Please paste your AIza... key from Google AI Studio first.";
+          return;
+        }
+        saveKeyBtn.disabled = true;
+        saveKeyBtn.textContent = "Verifying...";
+        keyStatus.style.color = "var(--text-muted)";
+        keyStatus.textContent = "Testing connection to Gemini 3.8 Flash...";
+        try {
+          const check = await callApiWithFallback("/api/verify-key", { api_key: candidate });
+          if (check && check.valid) {
+            sessionStorage.setItem(SESSION_KEY_STORAGE, candidate);
+            refreshApiKeyBadge();
+            keyStatus.style.color = "#34d399";
+            keyStatus.textContent = "✅ " + (check.message || "Connected to Gemini 3.8 Flash!");
+            setTimeout(closeModal, 900);
+          } else {
+            keyStatus.style.color = "#f87171";
+            keyStatus.textContent = (check && check.message) || "Invalid API key. Double-check at aistudio.google.com/apikey.";
+          }
+        } catch (_err) {
+          sessionStorage.setItem(SESSION_KEY_STORAGE, candidate);
+          refreshApiKeyBadge();
+          keyStatus.style.color = "#34d399";
+          keyStatus.textContent = "Saved key for this session.";
+          setTimeout(closeModal, 800);
+        } finally {
+          saveKeyBtn.disabled = false;
+          saveKeyBtn.textContent = "Verify & Save";
+        }
+      });
+    }
+
+    if (clearKeyBtn) {
+      clearKeyBtn.addEventListener("click", () => {
+        try {
+          sessionStorage.removeItem(SESSION_KEY_STORAGE);
+        } catch (_e) {}
+        keyInput.value = "";
+        refreshApiKeyBadge();
+        keyStatus.style.color = "var(--text-muted)";
+        keyStatus.textContent = "Cleared saved API key from this browser session.";
+      });
+    }
+
+    refreshApiKeyBadge();
 
     // Initial load
     inspectSource("inecnigeria.org");

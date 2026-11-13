@@ -562,33 +562,18 @@
         </section>
 
         <!-- ============================================================== -->
-        <!-- STEP 3: ENVIRONMENT SETUP (GOOGLE CLOUD SHELL PRIMARY)         -->
+        <!-- STEP 3: ENVIRONMENT & GOOGLE AI STUDIO API KEY SETUP           -->
         <!-- ============================================================== -->
-        <section class="codelab-step" data-title="Cloud Shell & Environment Setup" data-duration="5">
+        <section class="codelab-step" data-title="Environment & AI Studio Key" data-duration="5">
           <div class="step-header">
-            <h1>3. Set Up Google Cloud Shell &amp; Your Environment</h1>
+            <h1>3. Set Up Your Environment &amp; Google AI Studio API Key</h1>
             <span class="step-time-badge">Duration: 5:00</span>
           </div>
 
-          <p>Because you have <strong>Google Cloud workshop credits</strong>, you can run every single command in this codelab directly inside <strong>Google Cloud Shell</strong>—no local installations or manual API keys required!</p>
+          <p>You can run every command in this codelab inside <strong>Google Cloud Shell</strong> (<a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">shell.cloud.google.com</a>) or locally inside <strong>Antigravity IDE / Antigravity 2.0</strong>.</p>
 
-          <div class="aside-positive">
-            <strong>💡 Incognito Tip for Workshop Credits:</strong><br/>
-            Open the workshop credit redemption link and <a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">Google Cloud Shell</a> in an <strong>Incognito window</strong> signed in with your personal <code>@gmail.com</code> account so your personal and corporate accounts do not mix.
-          </div>
-
-          <h2>Step 3.1 — Activate Cloud Shell &amp; Select Your Project</h2>
-          <p>Open <a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">Google Cloud Shell</a> (or click the <strong>Activate Cloud Shell</strong> <code>&gt;_</code> icon in the top-right of the Google Cloud Console). Then run the following snippet to select your active workshop project and enable the Vertex AI / Agent Platform API:</p>
-          <pre><code>unset CLOUDSDK_CORE_PROJECT
-PS3="Select your workshop project number (e.g. 1): "
-select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
-  [ -n "$PROJECT_ID" ] &amp;&amp; gcloud config set project "$PROJECT_ID" &amp;&amp; break
-done
-
-gcloud services enable aiplatform.googleapis.com</code></pre>
-
-          <h2>Step 3.2 — Clone the Workshop Repository &amp; Install Dependencies</h2>
-          <p>In your Cloud Shell terminal, clone the starter repository, create a Python virtual environment, and install the dependencies:</p>
+          <h2>Step 3.1 — Clone the Workshop Repository &amp; Install Dependencies</h2>
+          <p>Open your terminal (in <a href="https://shell.cloud.google.com/?show=ide,terminal" target="_blank" rel="noopener">Google Cloud Shell</a> or Antigravity IDE), clone the starter repository, create a Python virtual environment, and install the dependencies:</p>
           <pre><code>cd ~
 git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
 cd ~/devfest-lagos-election-intelligence
@@ -597,19 +582,47 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt</code></pre>
+          <p><em>(On Windows PowerShell in Antigravity IDE, activate with <code>.\.venv\Scripts\Activate.ps1</code> instead of <code>source .venv/bin/activate</code>.)</em></p>
 
-          <h2>Step 3.3 — Auto-Configure <code>.env</code> for Cloud Shell &amp; Vertex AI</h2>
-          <p>Run this single command in Cloud Shell to automatically generate your <code>.env</code> file using your active Google Cloud project and workshop credits (no manual API key copying needed!):</p>
+          <h2>Step 3.2 — Configure Your Gemini 3.8 Flash Credentials (<code>.env</code>)</h2>
+          <p>Choose <strong>Option A (Recommended — Google AI Studio API Key)</strong> for the fastest 30-second setup, or <strong>Option B</strong> if using Google Cloud Vertex AI workshop credits:</p>
+
+          <h3>Option A (Recommended): Get a Free API Key on Google AI Studio</h3>
+          <ol>
+            <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener"><strong>Google AI Studio — Get API Key (aistudio.google.com/apikey)</strong></a> (or <a href="https://ai.dev" target="_blank" rel="noopener">ai.dev</a>) and sign in with your Google account.</li>
+            <li>Click <strong>Create API key</strong> and copy your generated <code>AIza...</code> key.</li>
+            <li>Run the command below in your terminal (replace <code>PASTE_YOUR_AI_STUDIO_KEY_HERE</code> with your copied key):</li>
+          </ol>
           <pre><code>cat &lt;&lt;EOF &gt; .env
-GOOGLE_GENAI_USE_VERTEXAI=1
-GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
-GOOGLE_CLOUD_LOCATION=global
+GOOGLE_API_KEY=PASTE_YOUR_AI_STUDIO_KEY_HERE
+GOOGLE_GENAI_USE_VERTEXAI=0
 ADK_MODEL=gemini-3.8-flash
 EOF
 
 cat .env</code></pre>
 
-          <p>To open the repository in the Cloud Shell Code Editor alongside your terminal, you can also run:</p>
+          <div class="aside-positive">
+            <strong>💡 Tip — Web UI Key Button:</strong><br/>
+            When you launch the web dashboard in Step 8, you can also click the <strong>🔑 AI Studio Key</strong> button in the top navigation bar at any time to paste or verify your Google AI Studio key directly in the browser!
+          </div>
+
+          <h3>Option B (Alternative): Use Google Cloud Workshop Credits (Vertex AI in Cloud Shell)</h3>
+          <p>If you prefer authenticating via your Google Cloud workshop credit project in Cloud Shell without an API key, run:</p>
+          <pre><code>unset CLOUDSDK_CORE_PROJECT
+PS3="Select your workshop project number (e.g. 1): "
+select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
+  [ -n "$PROJECT_ID" ] &amp;&amp; gcloud config set project "$PROJECT_ID" &amp;&amp; break
+done
+gcloud services enable aiplatform.googleapis.com
+
+cat &lt;&lt;EOF &gt; .env
+GOOGLE_GENAI_USE_VERTEXAI=1
+GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
+GOOGLE_CLOUD_LOCATION=global
+ADK_MODEL=gemini-3.8-flash
+EOF</code></pre>
+
+          <p>To open the repository files in the Cloud Shell Code Editor alongside your terminal, you can run:</p>
           <pre><code>cloudshell edit app/agents/coordinator.py</code></pre>
 
           <h2>Project Directory Structure</h2>
@@ -883,6 +896,7 @@ Multi-Source Count: 5</code></pre>
           <pre><code>from __future__ import annotations
 
 import os
+from dotenv import load_dotenv
 from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
@@ -895,6 +909,7 @@ from app.tools.election_tools import (
     verify_election_claim,
 )
 
+load_dotenv()
 MODEL_NAME = os.getenv("ADK_MODEL", "gemini-3.8-flash")
 
 # ---------------------------------------------------------------------------
@@ -1175,8 +1190,11 @@ adk web app --port 8080 --allow_origins "*"</code></pre>
           </ul>
 
           <div class="aside-positive">
-            <strong>🔍 Checkpoint — Test the Source Credibility Inspector:</strong><br/>
-            In the left sidebar of the dashboard under <strong>Source Credibility Allowlist Tool</strong>, click the <code>whatsapp-forward</code> chip and verify it returns <code>🚫 UNTRUSTED / BLOCKED • Trust Score: 0</code>.
+            <strong>🔍 Checkpoint — Test the Source Credibility Inspector &amp; Live Trace:</strong><br/>
+            <ol style="margin-top:0.4rem; margin-bottom:0;">
+              <li>In the left sidebar, click <strong>Check Source Credibility</strong> to expand the allowlist drawer, then click the <code>whatsapp-forward</code> chip and verify it returns <code>BLOCKED / UNTRUSTED • Score: 0</code>.</li>
+              <li>On the right panel, switch between the <strong>Intelligence Briefing</strong>, <strong>Verified Sources</strong>, and <strong>Agent Trace</strong> tabs to inspect how <code>election_intelligence_coordinator</code> delegated your request.</li>
+            </ol>
           </div>
         </section>
 

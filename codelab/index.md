@@ -108,20 +108,9 @@ In this step, you will clone the starter repository, create an isolated Python v
 * *(Optional)* A **Google Gemini API Key** (`GOOGLE_API_KEY`) or **Google Cloud Vertex AI Project** (`GOOGLE_CLOUD_PROJECT`).
   * *Note:* The project includes a **Zero-Downtime Grounded Tool Engine** fallback so you can complete every step of the workshop even if conference Wi-Fi drops or you don't have an API key handy!
 
-### 1. Activate Cloud Shell & Select Your Workshop Project
-Open [Google Cloud Shell](https://shell.cloud.google.com/?show=ide,terminal) and run:
+### 1. Clone the Workshop Repository & Install Dependencies
+Open [Google Cloud Shell](https://shell.cloud.google.com/?show=ide,terminal) or **Antigravity IDE** and run:
 
-```bash
-unset CLOUDSDK_CORE_PROJECT
-PS3="Select your workshop project number (e.g. 1): "
-select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
-  [ -n "$PROJECT_ID" ] && gcloud config set project "$PROJECT_ID" && break
-done
-
-gcloud services enable aiplatform.googleapis.com
-```
-
-### 2. Clone the Workshop Repository & Install Dependencies
 ```bash
 cd ~
 git clone https://github.com/gabbyagbobli/devfest-lagos-election-intelligence.git
@@ -133,18 +122,37 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Auto-Configure `.env` for Cloud Shell & Vertex AI
-Run this single command in Cloud Shell to automatically configure `.env` using your active Google Cloud project and workshop credits:
+### 2. Option A (Recommended): Configure a Google AI Studio API Key
+1. Open **[Google AI Studio — Get API Key](https://aistudio.google.com/apikey)** (or `https://ai.dev`) and click **Create API key**.
+2. Copy your `AIza...` key and create `.env` in the project root:
 
 ```bash
+cat <<EOF > .env
+GOOGLE_API_KEY=PASTE_YOUR_AI_STUDIO_KEY_HERE
+GOOGLE_GENAI_USE_VERTEXAI=0
+ADK_MODEL=gemini-3.8-flash
+EOF
+
+cat .env
+```
+
+### 3. Option B (Alternative): Auto-Configure `.env` with Google Cloud Workshop Credits (Vertex AI)
+If using Google Cloud workshop credits in Cloud Shell without an API key:
+
+```bash
+unset CLOUDSDK_CORE_PROJECT
+PS3="Select your workshop project number (e.g. 1): "
+select PROJECT_ID in $(gcloud projects list --format="value(projectId)"); do
+  [ -n "$PROJECT_ID" ] && gcloud config set project "$PROJECT_ID" && break
+done
+gcloud services enable aiplatform.googleapis.com
+
 cat <<EOF > .env
 GOOGLE_GENAI_USE_VERTEXAI=1
 GOOGLE_CLOUD_PROJECT=$(gcloud config get-value project)
 GOOGLE_CLOUD_LOCATION=global
 ADK_MODEL=gemini-3.8-flash
 EOF
-
-cat .env
 ```
 
 > aside positive

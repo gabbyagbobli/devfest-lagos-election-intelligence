@@ -16,7 +16,11 @@ from __future__ import annotations
 import asyncio
 from fastapi.testclient import TestClient
 
-from app.agents.coordinator import election_intelligence_coordinator, root_agent
+from app.agents.coordinator import (
+    build_coordinator_with_api_key,
+    election_intelligence_coordinator,
+    root_agent,
+)
 from app.agents.specialists import (
     claim_verification_agent,
     election_information_analyst,
@@ -47,6 +51,10 @@ def test_adk_agent_hierarchy_and_tools():
     assert len(election_research_agent.tools) == 3
     assert len(claim_verification_agent.tools) == 3
     assert len(election_information_analyst.tools) == 3
+
+    scoped_root = build_coordinator_with_api_key("AIzaSyDummyTestKey12345")
+    assert scoped_root.name == "election_intelligence_coordinator"
+    assert len(scoped_root.sub_agents) == 3
 
 
 def test_agent_delegation_routing():
@@ -147,6 +155,11 @@ def test_fastapi_endpoints_and_demo_questions():
     health = client.get("/api/health")
     assert health.status_code == 200
     assert health.json()["root_agent"] == "election_intelligence_coordinator"
+    assert health.json()["model"] == "gemini-3.8-flash"
+
+    codelab_resp = client.get("/codelab/")
+    assert codelab_resp.status_code == 200
+    assert "aistudio.google.com/apikey" in codelab_resp.text
 
     demo_queries = [
         ("What are the official voting procedures for this election?", "SUPPORTED"),

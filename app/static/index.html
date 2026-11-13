@@ -26,10 +26,42 @@
       <nav class="nav-links">
         <a href="/" class="nav-link active">Live Agent</a>
         <a href="/codelab/" class="nav-link">40-Min Codelab</a>
+        <button type="button" class="api-key-btn" id="open-api-modal-btn" title="Configure your Google AI Studio API Key">
+          🔑 <span id="api-key-btn-label">AI Studio Key</span>
+        </button>
         <a href="https://github.com/gabbyagbobli/devfest-lagos-election-intelligence" target="_blank" rel="noopener" class="nav-link">GitHub ↗</a>
       </nav>
     </div>
   </header>
+
+  <!-- Lightweight Google AI Studio API Key Modal -->
+  <div class="modal-backdrop" id="api-modal-backdrop" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="api-modal-title">
+      <div class="modal-header">
+        <h3 id="api-modal-title">Connect Google AI Studio API Key</h3>
+        <button type="button" class="modal-close-btn" id="close-api-modal-btn" aria-label="Close">✕</button>
+      </div>
+      <p class="modal-desc">
+        Generate a free Gemini API key in <strong>Google AI Studio</strong> to run the 4-agent ADK pipeline (`gemini-3.8-flash`) with your own credentials. Your key stays in your browser tab (`sessionStorage`) and is never saved on the server.
+      </p>
+      <ol class="modal-steps">
+        <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey ↗</a> and click <strong>Create API key</strong>.</li>
+        <li>Paste your <code>AIza...</code> key below and click <strong>Verify &amp; Save</strong>.</li>
+      </ol>
+      <input
+        type="password"
+        id="api-key-input"
+        class="source-input modal-key-input"
+        placeholder="AIzaSy..."
+        autocomplete="off"
+      />
+      <div id="api-key-status" class="modal-status"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="clear-api-key-btn">Clear Key</button>
+        <button type="button" class="btn-primary modal-save-btn" id="save-api-key-btn">Verify &amp; Save</button>
+      </div>
+    </div>
+  </div>
 
   <main class="container">
     <!-- Clean, Breathable Page Header & Agent Pipeline -->

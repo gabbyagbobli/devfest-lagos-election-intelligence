@@ -139,6 +139,136 @@ body {
   font-weight: 600;
 }
 
+.api-key-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.4rem 0.78rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  transition: all 0.16s ease;
+}
+
+.api-key-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.api-key-btn.key-active {
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.4);
+  background: var(--accent-emerald-soft);
+  font-weight: 600;
+}
+
+/* AI Studio Key Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(5, 8, 15, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.modal-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.modal-close-btn:hover {
+  color: #fff;
+}
+
+.modal-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  line-height: 1.55;
+}
+
+.modal-steps {
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.95rem;
+  line-height: 1.6;
+}
+
+.modal-steps a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.modal-steps a:hover {
+  text-decoration: underline;
+}
+
+.modal-key-input {
+  width: 100%;
+  margin-bottom: 0.65rem;
+  padding: 0.68rem 0.85rem;
+}
+
+.modal-status {
+  font-size: 0.8rem;
+  min-height: 1.2rem;
+  margin-bottom: 0.85rem;
+  color: var(--text-muted);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.modal-save-btn {
+  width: auto;
+  padding: 0.6rem 1.15rem;
+}
+
 /* Main Container */
 .container {
   max-width: 1240px;

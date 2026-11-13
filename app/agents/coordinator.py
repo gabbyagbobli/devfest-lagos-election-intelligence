@@ -7,6 +7,7 @@ appropriate specialist sub-agents and synthesizing transparent, source-backed re
 from __future__ import annotations
 
 from google.adk.agents import Agent
+from google.adk.models import Gemini
 from google.adk.tools import FunctionTool
 
 from app.agents.specialists import (
@@ -18,6 +19,7 @@ from app.agents.specialists import (
 from app.tools.election_tools import (
     check_source_credibility,
     compare_multi_source_coverage,
+    fetch_allowlisted_web_source,
     get_official_announcements,
     search_verified_election_corpus,
     verify_election_claim,
@@ -66,3 +68,65 @@ election_intelligence_coordinator = Agent(
 
 # ADK CLI (`adk run` and `adk web`) discovers `root_agent` by convention
 root_agent = election_intelligence_coordinator
+
+
+def build_coordinator_with_api_key(api_key: str) -> Agent:
+    """
+    Builds a request-scoped 4-agent hierarchy authenticated via a user-supplied
+    Google AI Studio API key (`api_key`), without mutating global environment state.
+    """
+    clean_key = api_key.strip()
+
+    def _make_model() -> Gemini:
+        return Gemini(
+            model=MODEL_NAME,
+            client_kwargs={"api_key": clean_key, "vertexai": False},
+        )
+
+    research_ag = Agent(
+        model=_make_model(),
+        name="election_research_agent",
+        description=election_research_agent.description,
+        instruction=election_research_agent.instruction,
+        tools=[
+            FunctionTool(search_verified_election_corpus),
+            FunctionTool(check_source_credibility),
+            FunctionTool(fetch_allowlisted_web_source),
+        ],
+    )
+    verify_ag = Agent(
+        model=_make_model(),
+        name="claim_verification_agent",
+        description=claim_verification_agent.description,
+        instruction=claim_verification_agent.instruction,
+        tools=[
+            FunctionTool(verify_election_claim),
+            FunctionTool(search_verified_election_corpus),
+            FunctionTool(check_source_credibility),
+        ],
+    )
+    analyst_ag = Agent(
+        model=_make_model(),
+        name="election_information_analyst",
+        description=election_information_analyst.description,
+        instruction=election_information_analyst.instruction,
+        tools=[
+            FunctionTool(get_official_announcements),
+            FunctionTool(compare_multi_source_coverage),
+            FunctionTool(search_verified_election_corpus),
+        ],
+    )
+    return Agent(
+        model=_make_model(),
+        name="election_intelligence_coordinator",
+        description=election_intelligence_coordinator.description,
+        instruction=COORDINATOR_INSTRUCTION,
+        sub_agents=[research_ag, verify_ag, analyst_ag],
+        tools=[
+            FunctionTool(search_verified_election_corpus),
+            FunctionTool(verify_election_claim),
+            FunctionTool(get_official_announcements),
+            FunctionTool(compare_multi_source_coverage),
+            FunctionTool(check_source_credibility),
+        ],
+    )

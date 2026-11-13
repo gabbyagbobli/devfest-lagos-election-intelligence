@@ -12,9 +12,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from google import genai
 from pydantic import BaseModel, Field
 
 from app.agents.coordinator import root_agent
+from app.agents.specialists import MODEL_NAME
 from app.orchestrator import run_election_intelligence_query
 from app.tools.election_tools import (
     check_source_credibility,
@@ -52,6 +54,14 @@ class QueryRequest(BaseModel):
         description="Routing mode: 'auto', 'research', 'verify', 'summarize', or 'compare'.",
     )
     session_id: str | None = Field(default=None, description="Optional session identifier.")
+    api_key: str | None = Field(
+        default=None,
+        description="Optional per-request Google AI Studio API key (never stored on server).",
+    )
+
+
+class ApiKeyVerifyRequest(BaseModel):
+    api_key: str = Field(..., min_length=10, description="Google AI Studio API key to test.")
 
 
 class ClaimVerifyRequest(BaseModel):
@@ -194,7 +204,32 @@ async def query_election_agent(req: QueryRequest) -> dict[str, Any]:
         query=req.query.strip(),
         mode=req.mode,
         session_id=req.session_id,
+        api_key=req.api_key,
     )
+
+
+@app.post("/api/verify-key")
+async def verify_ai_studio_key(req: ApiKeyVerifyRequest) -> dict[str, Any]:
+    clean_key = req.api_key.strip()
+    if not clean_key:
+        raise HTTPException(status_code=400, detail="API key cannot be empty.")
+    try:
+        client = genai.Client(api_key=clean_key, vertexai=False)
+        await client.aio.models.generate_content(
+            model=MODEL_NAME,
+            contents="Reply with OK",
+        )
+        return {
+            "valid": True,
+            "model": MODEL_NAME,
+            "message": f"Connected to {MODEL_NAME} via Google AI Studio.",
+        }
+    except Exception as exc:
+        return {
+            "valid": False,
+            "model": MODEL_NAME,
+            "message": f"API key check failed ({type(exc).__name__}). Verify your key at https://aistudio.google.com/apikey",
+        }
 
 
 @app.post("/api/verify")

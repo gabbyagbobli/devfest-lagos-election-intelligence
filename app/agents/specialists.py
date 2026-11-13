@@ -8,6 +8,7 @@ Specialized ADK Sub-Agents for the Election Intelligence System:
 from __future__ import annotations
 
 import os
+from dotenv import load_dotenv
 from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
@@ -20,7 +21,30 @@ from app.tools.election_tools import (
     verify_election_claim,
 )
 
+load_dotenv()
+
 MODEL_NAME = os.getenv("ADK_MODEL", "gemini-3.8-flash")
+
+
+def configure_genai_environment() -> None:
+    """
+    Ensures smooth out-of-the-box authentication for both:
+    - Option A: Google AI Studio API Key (`GOOGLE_API_KEY` / `GEMINI_API_KEY`)
+    - Option B: Google Cloud Vertex AI (`GOOGLE_GENAI_USE_VERTEXAI=1`)
+    """
+    api_key = (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "").strip()
+    if api_key:
+        # Prevent collision with GOOGLE_GENAI_USE_VERTEXAI or Cloud Shell's GOOGLE_CLOUD_PROJECT
+        os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "0"
+    elif (
+        os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
+        and "3.8" in MODEL_NAME
+        and os.getenv("GOOGLE_CLOUD_LOCATION", "").strip() in ("", "us-central1")
+    ):
+        os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
+
+
+configure_genai_environment()
 
 # ---------------------------------------------------------------------------
 # B. Election Research Agent

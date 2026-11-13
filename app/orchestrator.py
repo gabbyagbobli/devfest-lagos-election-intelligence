@@ -22,7 +22,8 @@ from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
-from app.agents.coordinator import root_agent
+from app.agents.coordinator import build_coordinator_with_api_key, root_agent
+from app.agents.specialists import MODEL_NAME, configure_genai_environment
 from app.tools.election_tools import (
     check_source_credibility,
     compare_multi_source_coverage,
@@ -356,6 +357,7 @@ async def run_election_intelligence_query(
     query: str,
     mode: str = "auto",
     session_id: str | None = None,
+    api_key: str | None = None,
 ) -> dict[str, Any]:
     """
     Executes a user query or claim through the Google ADK Election Intelligence
@@ -365,8 +367,12 @@ async def run_election_intelligence_query(
     routing = classify_intent(query, mode=mode)
     structured = _build_structured_intelligence(query, routing)
 
+    clean_user_key = (api_key or "").strip()
+    configure_genai_environment()
+
     use_live_adk = bool(
-        os.getenv("GOOGLE_API_KEY")
+        clean_user_key
+        or os.getenv("GOOGLE_API_KEY")
         or os.getenv("GEMINI_API_KEY")
         or os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
         or os.getenv("GOOGLE_GENAI_USE_ENTERPRISE", "").lower() in ("1", "true", "yes")
@@ -378,12 +384,11 @@ async def run_election_intelligence_query(
 
     if use_live_adk:
         try:
-            if (
-                os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
-                and "3.8" in str(root_agent.model)
-                and os.getenv("GOOGLE_CLOUD_LOCATION", "").strip() in ("", "us-central1")
-            ):
-                os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
+            active_agent = (
+                build_coordinator_with_api_key(clean_user_key)
+                if clean_user_key
+                else root_agent
+            )
 
             sid = session_id or f"session-{uuid.uuid4().hex[:8]}"
             user_id = "workshop-participant"
@@ -393,7 +398,7 @@ async def run_election_intelligence_query(
                 session_id=sid,
             )
             runner = Runner(
-                agent=root_agent,
+                agent=active_agent,
                 app_name=APP_NAME,
                 session_service=_session_service,
             )
@@ -433,7 +438,12 @@ async def run_election_intelligence_query(
 
             if collected_texts:
                 final_response_text = "\n\n".join(t.strip() for t in collected_texts if t.strip())
-                execution_engine = f"Google ADK 2 Live Runner ({root_agent.model})"
+                auth_source = (
+                    "AI Studio"
+                    if (clean_user_key or os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"))
+                    else "Vertex AI"
+                )
+                execution_engine = f"Google ADK 2 Live Runner ({MODEL_NAME} • {auth_source})"
         except Exception as exc:
             # Never fail a live workshop demo if API quota or network blips occur
             adk_live_events.append(
